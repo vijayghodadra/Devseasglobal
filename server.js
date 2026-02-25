@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
@@ -15,6 +16,19 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
+
+// Configure Multer for file uploads
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, 'public', 'uploads'));
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
 
 // API Routes
 app.get('/api/products', async (req, res) => {
@@ -150,22 +164,29 @@ app.delete('/api/categories/:id', authenticateToken, async (req, res) => {
     }
 });
 
-app.post('/api/products', authenticateToken, async (req, res) => {
+app.post('/api/products', authenticateToken, upload.single('image'), async (req, res) => {
     try {
-        const { name, categoryId, description, price, isActive } = req.body;
+        let { name, categoryId, description, price, isActive, cas_number, chemical_formula } = req.body;
         if (!name || !categoryId) return res.status(400).json({ error: 'Name and Category are required' });
 
-        const product = await prisma.product.create({
-            data: {
-                name,
-                description,
-                price: price ? parseFloat(price) : null,
-                isActive: isActive !== undefined ? isActive : true,
-                categoryId: parseInt(categoryId)
-            }
-        });
+        const data = {
+            name,
+            description,
+            price: price ? parseFloat(price) : null,
+            isActive: isActive !== "false" && isActive !== false,
+            categoryId: parseInt(categoryId),
+            cas_number: cas_number || null,
+            chemical_formula: chemical_formula || null
+        };
+
+        if (req.file) {
+            data.imageUrl = req.file.filename;
+        }
+
+        const product = await prisma.product.create({ data });
         res.status(201).json(product);
     } catch (error) {
+        console.error('Error creating product:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

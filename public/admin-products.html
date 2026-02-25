@@ -413,15 +413,81 @@
         </header>
 
         <main class="page-content">
-    <div class="card">
-        <div class="card-header">
-            <span><i class="fas fa-flask" style="color:#2dd4bf;margin-right:8px;"></i>All Products</span>
-        </div>
-        <div class="card-body">
-            <p>Products management API backend is established, but the UI table is still being built.</p>
-        </div>
-    </div>
-</main>
+            <div class="card" style="margin-bottom: 20px;">
+                <div class="card-header">
+                    <span><i class="fas fa-plus" style="color:#2dd4bf;margin-right:8px;"></i>Add New Product</span>
+                </div>
+                <div class="card-body">
+                    <form id="addProductForm" enctype="multipart/form-data"
+                        style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; align-items: flex-end;">
+                        <div style="grid-column: span 2;">
+                            <label class="form-label">Product Name</label>
+                            <input type="text" id="prodName" name="name" class="form-control"
+                                style="width: 100%; padding: 8px;" required>
+                        </div>
+                        <div>
+                            <label class="form-label">Category</label>
+                            <select id="prodCategory" name="categoryId" class="form-control"
+                                style="width: 100%; padding: 8px;" required>
+                                <option value="">Select Category...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Image</label>
+                            <input type="file" id="prodImage" name="image" class="form-control" accept="image/*"
+                                style="width: 100%; padding: 8px;">
+                        </div>
+                        <div style="grid-column: span 2;">
+                            <label class="form-label">Description</label>
+                            <textarea id="prodDesc" name="description" class="form-control" rows="3"
+                                style="width: 100%; padding: 8px;"></textarea>
+                        </div>
+                        <div>
+                            <label class="form-label">CAS Number</label>
+                            <input type="text" id="prodCas" name="cas_number" class="form-control"
+                                style="width: 100%; padding: 8px;">
+                        </div>
+                        <div>
+                            <label class="form-label">Chemical Formula</label>
+                            <input type="text" id="prodFormula" name="chemical_formula" class="form-control"
+                                style="width: 100%; padding: 8px;">
+                        </div>
+                        <div style="grid-column: span 2;">
+                            <button type="submit" class="btn btn-primary"
+                                style="width: 100%; justify-content:center; padding: 12px;">Save Product</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span><i class="fas fa-flask" style="color:#2dd4bf;margin-right:8px;"></i>All Products</span>
+                    <button class="btn btn-sm btn-secondary" onclick="fetchProducts()">Refresh</button>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>CAS No.</th>
+                                    <th>Formula</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align:center; padding: 20px;">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
@@ -445,61 +511,98 @@
             window.location.href = '/admin/login';
         }
 
-        async function fetchData() {
+        // Initial Load
+        loadCategoriesForSelect();
+        fetchProducts();
+
+        async function loadCategoriesForSelect() {
             try {
-                // Fetch inquiries
-                const resInq = await fetch('/api/inquiries', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                const res = await fetch('/api/categories');
+                const categories = await res.json();
+                const select = document.getElementById('prodCategory');
+                categories.forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat.id;
+                    option.textContent = cat.name;
+                    select.appendChild(option);
                 });
-
-                if (resInq.status === 401 || resInq.status === 403) {
-                    logout();
-                    return;
-                }
-
-                const inquiries = await resInq.json();
-
-                // Update Stat
-                document.getElementById('statInquiries').textContent = inquiries.length;
-
-                // Render Table
-                const tbody = document.getElementById('inquiriesTableBody');
-                if (inquiries.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 20px; color:#94a3b8;"><i class="fas fa-inbox" style="font-size:2rem; margin-bottom:10px; display:block;"></i> No inquiries yet.</td></tr>';
-                } else {
-                    let html = '';
-                    inquiries.slice(0, 10).forEach(inq => {
-                        const date = new Date(inq.createdAt).toLocaleDateString();
-                        html += `
-                        <tr>
-                            <td><strong>${inq.name || '-'}</strong></td>
-                            <td>${inq.email || '-'}</td>
-                            <td>${inq.phone || '—'}</td>
-                            <td style="max-width:260px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${inq.message || '-'}</td>
-                            <td style="color:#94a3b8;">${date}</td>
-                        </tr>
-                    `;
-                    });
-                    tbody.innerHTML = html;
-                }
-
-                // Fetch Products and Categories count
-                const resProd = await fetch('/api/products');
-                const products = await resProd.json();
-                document.getElementById('statProducts').textContent = products.length || 0;
-
-                const resCat = await fetch('/api/categories');
-                const categories = await resCat.json();
-                document.getElementById('statCategories').textContent = categories.length || 0;
-
             } catch (err) {
-                console.error(err);
-                document.getElementById('inquiriesTableBody').innerHTML = '<tr><td colspan="5" style="color: red; text-align:center; padding: 20px;">Error loading data.</td></tr>';
+                console.error('Failed to load categories');
             }
         }
 
-        // Load data on start
-        fetchData();
+        async function fetchProducts() {
+            try {
+                const res = await fetch('/api/products');
+                const products = await res.json();
+
+                const tbody = document.getElementById('productsTableBody');
+                if (products.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 20px; color:#94a3b8;"><i class="fas fa-flask" style="font-size:2rem; margin-bottom:10px; display:block;"></i> No products yet.</td></tr>';
+                } else {
+                    let html = '';
+                    products.forEach(p => {
+                        html += `
+                        <tr>
+                            <td>
+                                ${p.imageUrl ? `<img src="/uploads/${p.imageUrl}" style="width:40px; height:40px; border-radius:4px; object-fit:cover;">` : '<div style="width:40px; height:40px; background:#f1f5f9; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-flask"></i></div>'}
+                            </td>
+                            <td>
+                                <strong>${p.name}</strong><br>
+                                <small style="color:#94a3b8;">${p.description ? p.description.substring(0, 40) + '...' : ''}</small>
+                            </td>
+                            <td><span style="background:rgba(45,212,191,0.1); color:#0d9488; padding:3px 8px; border-radius:12px; font-size:0.75rem;">${p.category ? p.category.name : '—'}</span></td>
+                            <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${p.cas_number || '—'}</td>
+                            <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${p.chemical_formula || '—'}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        `;
+                    });
+                    tbody.innerHTML = html;
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('productsTableBody').innerHTML = '<tr><td colspan="6" style="color: red; text-align:center; padding: 20px;">Error loading data.</td></tr>';
+            }
+        }
+
+        document.getElementById('addProductForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+
+            try {
+                const res = await fetch('/api/products', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+
+                if (res.ok) {
+                    e.target.reset();
+                    fetchProducts();
+                } else {
+                    alert('Failed to add product');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
+
+        async function deleteProduct(id) {
+            if (!confirm('Are you sure you want to delete this product?')) return;
+            try {
+                const res = await fetch(`/api/products/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) fetchProducts();
+            } catch (err) {
+                console.error(err);
+            }
+        }
     </script>
 
 </body>

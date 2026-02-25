@@ -1,10 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 const app = express();
+const JWT_SECRET = process.env.JWT_SECRET || 'devseas_super_secret_key_2026';
 
 app.use(cors());
 app.use(express.json());
@@ -61,6 +64,65 @@ app.post('/api/contact', async (req, res) => {
         res.status(201).json({ success: true, message: 'Message sent successfully!', data: inquiry });
     } catch (error) {
         console.error('Error submitting inquiry:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.post('/api/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ error: 'Email and password are required' });
+        }
+
+        const user = await prisma.user.findUnique({ where: { email } });
+
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+
+        if (!user.isAdmin) {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1d' });
+
+        res.json({ success: true, token, user: { id: user.id, email: user.email, name: user.name } });
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Auth Middleware
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (token == null) return res.status(401).json({ error: 'Unauthorized' });
+
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) return res.status(403).json({ error: 'Forbidden' });
+        req.user = user;
+        next();
+    });
+};
+
+app.get('/api/inquiries', authenticateToken, async (req, res) => {
+    try {
+        const inquiries = await prisma.inquiry.findMany({
+            orderBy: { createdAt: 'desc' }
+        });
+        res.json(inquiries);
+    } catch (error) {
+        console.error('Error fetching inquiries:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

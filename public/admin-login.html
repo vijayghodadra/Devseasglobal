@@ -188,27 +188,72 @@
             <p>DEVSEAS Global — Admin Panel</p>
         </div>
 
-        <!-- Static Preview: Form action points back to index.html -->
-        <form action="index.html" method="GET"
-            onsubmit="alert('This is a static preview. You cannot log in here.'); return false;">
+        <!-- Dynamic Form using Javascript -->
+        <form id="adminLoginForm">
+            <div id="loginError"
+                style="color: #ef4444; font-size: 0.85rem; margin-bottom: 15px; text-align: center; display: none;">
+            </div>
             <div class="form-group">
                 <label class="form-label">Email Address</label>
                 <div class="input-wrap">
                     <i class="fas fa-envelope input-icon"></i>
-                    <input type="email" class="form-control" placeholder="admin@devseas.com" required autofocus>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="admin@devseas.com" required
+                        autofocus>
                 </div>
             </div>
             <div class="form-group">
                 <label class="form-label">Password</label>
                 <div class="input-wrap">
                     <i class="fas fa-lock input-icon"></i>
-                    <input type="password" class="form-control" placeholder="••••••••" required>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
                 </div>
             </div>
             <button type="submit" class="btn-login"><i class="fas fa-right-to-bracket"></i> Sign In</button>
         </form>
         <a href="index.html" class="login-footer">Protected area — Return to Home</a>
     </div>
+
+    <script>
+        document.getElementById('adminLoginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btn = this.querySelector('.btn-login');
+            const originalText = btn.innerHTML;
+            const errorDiv = document.getElementById('loginError');
+
+            errorDiv.style.display = 'none';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: document.getElementById('loginEmail').value,
+                        password: document.getElementById('loginPassword').value
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Success! Store token and redirect
+                    localStorage.setItem('adminToken', data.token);
+                    localStorage.setItem('adminUser', JSON.stringify(data.user));
+                    window.location.href = '/admin-dashboard.html';
+                } else {
+                    errorDiv.textContent = data.error || 'Authentication failed';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Network error. Please try again.';
+                errorDiv.style.display = 'block';
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
 
 </html>

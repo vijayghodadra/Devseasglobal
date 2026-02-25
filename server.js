@@ -203,6 +203,36 @@ app.post('/api/products', authenticateToken, upload.single('image'), async (req,
     }
 });
 
+app.put('/api/products/:id', authenticateToken, upload.single('image'), async (req, res) => {
+    try {
+        let { name, categoryId, description, isActive, cas_number, chemical_formula } = req.body;
+
+        const data = {};
+        if (name) {
+            data.name = name;
+            data.slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Date.now().toString().slice(-4);
+        }
+        if (description !== undefined) data.description = description;
+        if (isActive !== undefined) data.isActive = isActive !== "false" && isActive !== false;
+        if (categoryId) data.categoryId = parseInt(categoryId);
+        if (cas_number !== undefined) data.casNumber = cas_number || null;
+        if (chemical_formula !== undefined) data.formula = chemical_formula || null;
+
+        if (req.file) {
+            data.image = req.file.filename;
+        }
+
+        const product = await prisma.product.update({
+            where: { id: parseInt(req.params.id) },
+            data
+        });
+        res.json(product);
+    } catch (error) {
+        console.error('Error updating product:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 app.delete('/api/products/:id', authenticateToken, async (req, res) => {
     try {
         await prisma.product.delete({ where: { id: parseInt(req.params.id) } });

@@ -382,7 +382,8 @@
             <div class="card">
                 <div class="card-header">
                     <span><i class="fas fa-flask" style="color:#2dd4bf;margin-right:8px;"></i> All Products</span>
-                    <button class="btn btn-add" onclick="toggleForm()"><i class="fas fa-plus"></i> Add Product</button>
+                    <button class="btn btn-add" onclick="toggleForm()"><i class="fas fa-plus"></i> <span
+                            id="addBtnText">Add Product</span></button>
                 </div>
 
                 <div class="form-container" id="productFormContainer">
@@ -418,7 +419,8 @@
                             style="grid-column: span 2; display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
                             <button type="button" class="btn" style="background:#e2e8f0; color:#475569;"
                                 onclick="toggleForm()">Cancel</button>
-                            <button type="submit" class="btn btn-add"><i class="fas fa-check"></i> Save Product</button>
+                            <button type="submit" class="btn btn-add"><i class="fas fa-check"></i> <span
+                                    id="submitBtnText">Save Product</span></button>
                         </div>
                     </form>
                 </div>
@@ -464,11 +466,21 @@
             window.location.href = '/admin/login';
         }
 
-        function toggleForm() {
+        let editingProductId = null;
+        let pList = [];
+
+        function toggleForm(isEdit = false) {
             const container = document.getElementById('productFormContainer');
-            if (container.style.display === 'block') {
-                container.style.display = 'none';
+
+            if (!isEdit) {
+                editingProductId = null;
                 document.getElementById('addProductForm').reset();
+                document.getElementById('addBtnText').innerText = "Add Product";
+                document.getElementById('submitBtnText').innerText = "Save Product";
+            }
+
+            if (container.style.display === 'block' && !isEdit) {
+                container.style.display = 'none';
             } else {
                 container.style.display = 'block';
             }
@@ -495,6 +507,7 @@
             try {
                 const res = await fetch('/api/products');
                 const products = await res.json();
+                pList = products; // store globally for editing
                 const tbody = document.getElementById('productsTableBody');
 
                 if (products.length === 0) {
@@ -503,7 +516,7 @@
                     let html = '';
                     products.forEach(p => {
                         let imgHtml = p.image
-                            ? `<img src="/uploads/${p.image}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;">`
+                            ? `<img src="/uploads/${p.image}" onerror="this.onerror=null; this.src='https://img.icons8.com/color/96/pill.png';" style="width:40px; height:40px; border-radius:6px; object-fit:cover;">`
                             : `<div style="width:40px; height:40px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-flask"></i></div>`;
 
                         html += `
@@ -517,7 +530,7 @@
                             <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${p.casNumber || '—'}</td>
                             <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${p.formula || '—'}</td>
                             <td>
-                                <button class="btn btn-sm btn-edit" onclick="alert('Inline editing coming soon!')"><i class="fas fa-pen"></i> Edit</button>
+                                <button class="btn btn-sm btn-edit" onclick="editProduct(${p.id})"><i class="fas fa-pen"></i> Edit</button>
                                 <button class="btn btn-sm btn-delete" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
@@ -528,19 +541,46 @@
             } catch (err) { console.error(err); }
         }
 
+        function editProduct(id) {
+            const product = pList.find(p => p.id === id);
+            if (!product) return;
+
+            editingProductId = product.id;
+
+            document.getElementById('prodName').value = product.name || '';
+            document.getElementById('prodCategory').value = product.categoryId || '';
+            document.getElementById('prodCas').value = product.casNumber || '';
+            document.getElementById('prodFormula').value = product.formula || '';
+            document.getElementById('prodDesc').value = product.description || '';
+
+            document.getElementById('addBtnText').innerText = "Edit Product";
+            document.getElementById('submitBtnText').innerText = "Update Product";
+
+            toggleForm(true);
+        }
+
         document.getElementById('addProductForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(e.target);
+
+            let url = '/api/products';
+            let method = 'POST';
+
+            if (editingProductId) {
+                url = `/api/products/${editingProductId}`;
+                method = 'PUT';
+            }
+
             try {
-                const res = await fetch('/api/products', {
-                    method: 'POST',
+                const res = await fetch(url, {
+                    method: method,
                     headers: { 'Authorization': `Bearer ${token}` },
                     body: formData
                 });
                 if (res.ok) {
                     toggleForm();
                     fetchProducts();
-                } else { alert('Failed to add product'); }
+                } else { alert('Failed to save product'); }
             } catch (err) { console.error(err); }
         });
 

@@ -127,6 +127,58 @@ app.get('/api/inquiries', authenticateToken, async (req, res) => {
     }
 });
 
+app.post('/api/categories', authenticateToken, async (req, res) => {
+    try {
+        const { name, description } = req.body;
+        if (!name) return res.status(400).json({ error: 'Name is required' });
+
+        const category = await prisma.category.create({
+            data: { name, description }
+        });
+        res.status(201).json(category);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.delete('/api/categories/:id', authenticateToken, async (req, res) => {
+    try {
+        await prisma.category.delete({ where: { id: parseInt(req.params.id) } });
+        res.json({ success: true });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.post('/api/products', authenticateToken, async (req, res) => {
+    try {
+        const { name, categoryId, description, price, isActive } = req.body;
+        if (!name || !categoryId) return res.status(400).json({ error: 'Name and Category are required' });
+
+        const product = await prisma.product.create({
+            data: {
+                name,
+                description,
+                price: price ? parseFloat(price) : null,
+                isActive: isActive !== undefined ? isActive : true,
+                categoryId: parseInt(categoryId)
+            }
+        });
+        res.status(201).json(product);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.delete('/api/products/:id', authenticateToken, async (req, res) => {
+    try {
+        await prisma.product.delete({ where: { id: parseInt(req.params.id) } });
+        res.json({ success: true });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 // Admin Login Route mapping
 app.get('/admin/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin-login.html'));

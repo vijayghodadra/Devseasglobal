@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://img.icons8.com">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - DevSeas Global</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Antigravity: AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo-container" style="text-decoration: none;">
+                <img src="assets/images/DEVSEAS logo.png" alt="DevSeas Global" class="site-logo"
+                    style="height: 50px; width: auto;">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-item">
+                    <a href="products.html" class="active" onclick="toggleDropdown(event, this)">Products <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="products.html?category=all" class="dropdown-item">All Products</a>
+                        <a href="products.html?category=antacids" class="dropdown-item">Antacids & Laxatives</a>
+                        <a href="products.html?category=food-beverages" class="dropdown-item">Food & Beverages &
+                            Pharma</a>
+                        <a href="products.html?category=electrolytes" class="dropdown-item">ORS & Injectables</a>
+                        <a href="products.html?category=excipients" class="dropdown-item">Pharma & Nutraceuticals</a>
+                    </div>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="nav-item">
+                    <a href="services.html" onclick="toggleDropdown(event, this)">Services <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="services.html" class="dropdown-item">Chemical Trading</a>
+                        <a href="quality.html" class="dropdown-item">Quality Assurance</a>
+                        <a href="logistics.html" class="dropdown-item">Global Logistics</a>
+                    </div>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Our Products</h1>
+            <p>We manufacture a wide range of high-quality Pharmaceutical APIs (Active Pharmaceutical Ingredients) and
+                Excipients.</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Filter Section -->
+        <div class="products-filter-section" data-aos="fade-up">
+            <div class="filter-row">
+                <div class="search-group">
+                    <label class="filter-label">Search Products</label>
+                    <input type="text" id="searchInput" class="search-input"
+                        placeholder="Search by name, CAS number, or application...">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Category</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="all">All Products</option>
+                        <option value="antacids">Antacids</option>
+                        <option value="excipients">Excipients</option>
+                        <option value="electrolytes">Electrolytes</option>
+                        <option value="food-beverages">Food & Beverages</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Sort By</label>
+                    <select id="sortFilter" class="filter-select">
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Info -->
+        <div class="results-info" data-aos="fade-up" data-aos-delay="100">
+            <span id="resultsCount">Showing 8 of 8 products</span>
+            <div class="view-options">
+                <div class="view-btn active"><i class="fas fa-th-large"></i></div>
+                <div class="view-btn"><i class="fas fa-list"></i></div>
+            </div>
+        </div>
+
+        <!-- Enhanced Product Grid -->
+        <div class="product-grid" id="productGrid"
+            style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;">
+
+            <!-- Product 1 -->
+            <div class="product-card-enhanced" data-category="antacids" data-name="Aluminum Hydroxide Paste"
+                data-aos="fade-up" data-aos-delay="200">
+                <div class="pc-header">
+                    <span class="stock-status">In Stock</span>
+                    <span class="grade-badge">IP/BP/USP</span>
+                </div>
+
+                <div class="pc-image-container">
+                    <!-- Placeholder for product image -->
+                    <img src="https://img.icons8.com/color/96/pill.png" alt="Product Image" loading="lazy">
+                </div>
+
+                <h3 class="pc-title">Aluminum Hydroxide Paste</h3>
+
+                <div class="pc-meta">
+                    <div><strong>CAS:</strong> 21645-51-2</div>
+                    <div><strong>Category:</strong> Antacids</div>
+                </div>
+
+                <p class="pc-desc">High-quality ingredients for antacid formulations. Used primarily for the treatment
+                    of heartburn and acid indigestion.</p>
+
+                <div class="app-tags">
+                    <span class="app-tag">Antacids</span>
+                    <span class="app-tag">Pharma</span>
+                </div>
+
+                <div class="pc-footer">
+                    <span class="contact-pricing">Contact for pricing</span>
+                    <button class="btn-full">Request Quote</button>
+                </div>
+            </div>
+            <!-- Product 3-->
+            <div class="product-card-enhanced" data-category="electrolytes" data-name="Potassium Chloride"
+                data-aos="fade-up" data-aos-delay="400">
+                <div class="pc-header">
+                    <span class="stock-status">In Stock</span>
+                    <span class="grade-badge">IP/BP/USP</span>
+                </div>
+
+                <div class="pc-image-container">
+                    <img src="https://img.icons8.com/color/96/salt-shaker.png" alt="Product Image" loading="lazy">
+                </div>
+
+                <h3 class="pc-title">Potassium Chloride</h3>
+
+                <div class="pc-meta">
+                    <div><strong>CAS:</strong> 7447-40-7</div>
+                    <div><strong>Category:</strong> Electrolytes</div>
+                </div>
+
+                <p class="pc-desc">Essential electrolyte supplement. Highly pure crystalline powder for oral and
+                    injectable solutions.</p>
+
+                <div class="app-tags">
+                    <span class="app-tag">Injectables</span>
+                    <span class="app-tag">Dialysis</span>
+                </div>
+
+                <div class="pc-footer">
+                    <span class="contact-pricing">Contact for pricing</span>
+                    <button class="btn-full">Request Quote</button>
+                </div>
+            </div>
+
+
+            <!-- Product 3 -->
+            <div class="product-card-enhanced" data-category="electrolytes" data-name="Potassium Chloride"
+                data-aos="fade-up" data-aos-delay="400">
+                <div class="pc-header">
+                    <span class="stock-status">In Stock</span>
+                    <span class="grade-badge">IP/BP/USP</span>
+                </div>
+
+                <div class="pc-image-container">
+                    <img src="https://img.icons8.com/color/96/salt-shaker.png" alt="Product Image" loading="lazy">
+                </div>
+
+                <h3 class="pc-title">Potassium Chloride</h3>
+
+                <div class="pc-meta">
+                    <div><strong>CAS:</strong> 7447-40-7</div>
+                    <div><strong>Category:</strong> Electrolytes</div>
+                </div>
+
+                <p class="pc-desc">Essential electrolyte supplement. Highly pure crystalline powder for oral and
+                    injectable solutions.</p>
+
+                <div class="app-tags">
+                    <span class="app-tag">Injectables</span>
+                    <span class="app-tag">Dialysis</span>
+                </div>
+
+                <div class="pc-footer">
+                    <span class="contact-pricing">Contact for pricing</span>
+                    <button class="btn-full">Request Quote</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card-enhanced" data-category="excipients" data-name="Dextrose Anhydrous"
+                data-aos="fade-up" data-aos-delay="500">
+                <div class="pc-header">
+                    <span class="stock-status">In Stock</span>
+                    <span class="grade-badge">IP/BP/USP</span>
+                </div>
+
+                <div class="pc-image-container">
+                    <img src="https://img.icons8.com/color/96/sugar.png" alt="Product Image" loading="lazy">
+                </div>
+
+                <h3 class="pc-title">Dextrose Anhydrous</h3>
+
+                <div class="pc-meta">
+                    <div><strong>CAS:</strong> 50-99-7</div>
+                    <div><strong>Category:</strong> Excipients</div>
+                </div>
+
+                <p class="pc-desc">High-purity, water-free glucose powder for pharmaceutical and nutritional
+                    applications.</p>
+
+                <div class="app-tags">
+                    <span class="app-tag">IV Solutions</span>
+                    <span class="app-tag">Nutrition</span>
+                </div>
+
+                <div class="pc-footer">
+                    <span class="contact-pricing">Contact for pricing</span>
+                    <button class="btn-full">Request Quote</button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card-enhanced" data-category="excipients" data-name="Sodium Citrate" data-aos="fade-up"
+                data-aos-delay="600">
+                <div class="pc-header">
+                    <span class="stock-status">In Stock</span>
+                    <span class="grade-badge">IP/BP/USP</span>
+                </div>
+
+                <div class="pc-image-container">
+                    <img src="https://img.icons8.com/color/96/test-tube.png" alt="Product Image" loading="lazy">
+                </div>
+
+                <h3 class="pc-title">Sodium Citrate</h3>
+
+                <div class="pc-meta">
+                    <div><strong>CAS:</strong> 68-04-2</div>
+                    <div><strong>Category:</strong> Excipients</div>
+                </div>
+
+                <p class="pc-desc">Used as an alkalinizing agent, buffering agent, and anticoagulant in various medical
+                    applications.</p>
+
+                <div class="app-tags">
+                    <span class="app-tag">Buffer</span>
+                    <span class="app-tag">Anticoagulant</span>
+                </div>
+
+                <div class="pc-footer">
+                    <span class="contact-pricing">Contact for pricing</span>
+                    <button class="btn-full">Request Quote</button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card-enhanced" data-category="excipients" data-name="Microcrystalline Cellulose"
+                data-aos="fade-up" data-aos-delay="700">
+                <div class="pc-header">
+                    <span class="stock-status">In Stock</span>
+                    <span class="grade-badge">IP/BP/USP</span>
+                </div>
+
+                <div class="pc-image-container">
+                    <img src="https://img.icons8.com/color/96/powder.png" alt="Product Image" loading="lazy">
+                </div>
+
+                <h3 class="pc-title">Microcrystalline Cellulose</h3>
+
+                <div class="pc-meta">
+                    <div><strong>CAS:</strong> 9004-34-6</div>
+                    <div><strong>Category:</strong> Excipients</div>
+                </div>
+
+                <p class="pc-desc">Widely used excipient in pharmaceutical industry as a binder/diluent in tablets and
+                    capsules.</p>
+
+                <div class="app-tags">
+                    <span class="app-tag">Binder</span>
+                    <span class="app-tag">Tableting</span>
+                </div>
+
+                <div class="pc-footer">
+                    <span class="contact-pricing">Contact for pricing</span>
+                    <button class="btn-full">Request Quote</button>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card-enhanced" data-category="excipients" data-name="Sodium Citrate" data-aos="fade-up"
+                data-aos-delay="600">
+                <div class="pc-header">
+                    <span class="stock-status">In Stock</span>
+                    <span class="grade-badge">IP/BP/USP</span>
+                </div>
+
+                <div class="pc-image-container">
+                    <img src="https://img.icons8.com/color/96/test-tube.png" alt="Product Image" loading="lazy">
+                </div>
+
+                <h3 class="pc-title">Sodium Citrate</h3>
+
+                <div class="pc-meta">
+                    <div><strong>CAS:</strong> 68-04-2</div>
+                    <div><strong>Category:</strong> Excipients</div>
+                </div>
+
+                <p class="pc-desc">Used as an alkalinizing agent, buffering agent, and anticoagulant in various medical
+                    applications.</p>
+
+                <div class="app-tags">
+                    <span class="app-tag">Buffer</span>
+                    <span class="app-tag">Anticoagulant</span>
+                </div>
+
+                <div class="pc-footer">
+                    <span class="contact-pricing">Contact for pricing</span>
+                    <button class="btn-full">Request Quote</button>
+                </div>
+            </div>
+
+
+            <!-- Product 8 -->
+            <div class="product-card-enhanced" data-category="excipients" data-name="Dextrose Anhydrous"
+                data-aos="fade-up" data-aos-delay="500">
+                <div class="pc-header">
+                    <span class="stock-status">In Stock</span>
+                    <span class="grade-badge">IP/BP/USP</span>
+                </div>
+
+                <div class="pc-image-container">
+                    <img src="https://img.icons8.com/color/96/sugar.png" alt="Product Image" loading="lazy">
+                </div>
+
+                <h3 class="pc-title">Dextrose Anhydrous</h3>
+
+                <div class="pc-meta">
+                    <div><strong>CAS:</strong> 50-99-7</div>
+                    <div><strong>Category:</strong> Excipients</div>
+                </div>
+
+                <p class="pc-desc">High-purity, water-free glucose powder for pharmaceutical and nutritional
+                    applications.</p>
+
+                <div class="app-tags">
+                    <span class="app-tag">IV Solutions</span>
+                    <span class="app-tag">Nutrition</span>
+                </div>
+
+                <div class="pc-footer">
+                    <span class="contact-pricing">Contact for pricing</span>
+                    <button class="btn-full">Request Quote</button>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="main-footer" data-aos="fade-up">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo-col">
+                    <div class="logo-container" style="background: transparent; color: white; padding: 0;">
+                        <img src="assets/images/DEVSEAS logo.png" alt="DevSeas" style="height:40px; width:auto;"
+                            loading="lazy">
+                    </div>
+                    <p>We are committed to empowering businesses worldwide by offering premium export solutions tailored
+                        to their unique needs. With extensive experience and a profound understanding of international
+                        markets, we take pride in delivering exceptional service, unmatched reliability, and outstanding
+                        value.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html" onclick="toggleDropdown(event, this)">Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Product Categories</h4>
+                    <ul>
+                        <li><a href="products.html">Pharmaceutical Excipients</a></li>
+                        <li><a href="products.html">Dextrose Products</a></li>
+                        <li><a href="products.html">Antacid Products</a></li>
+                        <li><a href="products.html">Industrial Chemicals</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <ul class="contact-info-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>FF-16 Kanha Luxuria, Savita Hospital Road, Parivar Char Rasta, Vadodara, Gujarat
+                                390025</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>
+                                <a href="tel:+4915560547524" style="color: inherit; text-decoration: none;">+49 15560
+                                    547524</a>,
+                                <a href="tel:+916352322122" style="color: inherit; text-decoration: none;">+91 63523
+                                    22122</a>
+                            </span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@devseasglobal.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom" style="flex-direction: column; gap: 15px;">
+                <div
+                    style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <p style="margin: 0;">&copy; 2026 DevSeas Global. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Quality Policy</a>
+                    </div>
+                </div>
+                <div class="powered-by"
+                    style="display: flex; align-items: center; gap: 10px; font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; width: 100%; justify-content: center;">
+                    <span style="color: #cbd5e1;">Powered by TejasKP AI Software</span>
+                    <a href="https://tejaskp.in/login" target="_blank" style="text-decoration: none;">
+                        <img src="assets/images/tejaskp_logo.png" alt="TejasKP AI Software"
+                            style="height: 25px; vertical-align: middle; filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));"
+                            loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optimized Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true,
+            offset: 100
+        });
+
+        // Filter Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const sortFilter = document.getElementById('sortFilter');
+            const productGrid = document.getElementById('productGrid');
+            const products = Array.from(document.querySelectorAll('.product-card-enhanced'));
+            const resultsCount = document.getElementById('resultsCount');
+
+            // Parse URL parameters for initial category
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialCategory = urlParams.get('category');
+            if (initialCategory) {
+                // If the value exists in the dropdown, select it
+                const option = categoryFilter.querySelector(`option[value="${initialCategory}"]`);
+                if (option) {
+                    categoryFilter.value = initialCategory;
+                }
+            }
+
+            function filterProducts() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedCategory = categoryFilter.value;
+                const selectedSort = sortFilter.value;
+
+                let visibleCount = 0;
+
+                products.forEach(product => {
+                    const name = (product.dataset.name || '').toLowerCase();
+                    const category = product.dataset.category || 'all';
+                    const cas = (product.dataset.cas || '').toLowerCase();
+
+                    // Check search term (name or CAS)
+                    const matchesSearch = name.includes(searchTerm) || cas.includes(searchTerm);
+                    // Check category
+                    const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+
+                    if (matchesSearch && matchesCategory) {
+                        product.style.display = 'flex'; // Restore display flex
+                        visibleCount++;
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+
+                // Sort Logic (Basic DOM reordering)
+                const visibleProducts = products.filter(p => p.style.display !== 'none');
+                visibleProducts.sort((a, b) => {
+                    const nameA = (a.dataset.name || '').toLowerCase();
+                    const nameB = (b.dataset.name || '').toLowerCase();
+
+                    if (selectedSort === 'name-asc') return nameA.localeCompare(nameB);
+                    if (selectedSort === 'name-desc') return nameB.localeCompare(nameA);
+                    return 0; // Default (dom order/newest logic if applicable)
+                });
+
+                // Re-append sorted visible products (and hidden ones at the end if needed, or just re-append all in correct order)
+                products.sort((a, b) => {
+                    const nameA = (a.dataset.name || '').toLowerCase();
+                    const nameB = (b.dataset.name || '').toLowerCase();
+
+                    if (selectedSort === 'name-asc') return nameA.localeCompare(nameB);
+                    if (selectedSort === 'name-desc') return nameB.localeCompare(nameA);
+                    return 0;
+                });
+
+                // Reset Animation Delays for visible items
+                let delayCounter = 0;
+                products.forEach(p => {
+                    if (p.style.display !== 'none') {
+                        // Reset delay to ensure sequential animation
+                        p.setAttribute('data-aos-delay', (delayCounter * 100) + 100);
+                        p.classList.remove('aos-animate'); // Remove class to re-trigger
+                        delayCounter++;
+                    }
+                });
+
+                products.forEach(p => productGrid.appendChild(p));
+
+                resultsCount.textContent = `Showing ${visibleCount} of ${products.length} products`;
+
+                // Refresh AOS to catch new positions
+                if (window.AOS) {
+                    setTimeout(() => {
+                        window.AOS.refresh();
+                    }, 100);
+                }
+            }
+
+            // Event Listeners
+            searchInput.addEventListener('input', filterProducts);
+            categoryFilter.addEventListener('change', filterProducts);
+            sortFilter.addEventListener('change', filterProducts);
+
+            // Initial Filter Run
+            filterProducts();
+        });
+    </script>
+
+</body>
+
+</html>

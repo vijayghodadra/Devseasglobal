@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://img.icons8.com">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - DevSeas Global</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Antigravity: AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo-container">
+                <img src="assets/images/DEVSEAS logo.png" alt="DEVSEAS Global" class="site-logo">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-item">
+                    <a href="products.html" onclick="toggleDropdown(event, this)">Products <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="products.html" class="dropdown-item">All Products</a>
+                        <a href="products.html" class="dropdown-item">Antacids & Laxatives</a>
+                        <a href="products.html" class="dropdown-item">Food & Beverages & Pharma</a>
+                        <a href="products.html" class="dropdown-item">ORS & Injectables</a>
+                        <a href="products.html" class="dropdown-item">Pharma & Nutraceuticals</a>
+                    </div>
+                </li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li class="nav-item">
+                    <a href="services.html" onclick="toggleDropdown(event, this)">Services <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="services.html" class="dropdown-item">Chemical Trading</a>
+                        <a href="quality.html" class="dropdown-item">Quality Assurance</a>
+                        <a href="logistics.html" class="dropdown-item">Global Logistics</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-aos="fade-down">About DevSeas Global</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Driving innovation in pharmaceutical manufacturing since 2010.
+            </p>
+        </div>
+    </div>
+
+    <!-- Section 1: Who We Are -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text-col" data-aos="fade-right">
+                    <h2 class="section-title">Connecting Global Markets with Expertise and Trust</h2>
+                    <p>At <strong>Devseas Global</strong>, we are committed to empowering businesses worldwide by
+                        offering premium export solutions tailored to their unique needs. With extensive experience and
+                        a profound understanding of international markets, we take pride in delivering exceptional
+                        service, unmatched reliability, and outstanding value.</p>
+                    <p>Our team of seasoned experts excels in sourcing, logistics, and compliance, ensuring that every
+                        product reaches its destination efficiently and adheres to global standards. From meticulous
+                        documentation to streamlined freight management, we handle every detail, making the export
+                        process smooth and worry-free for our clients.</p>
+
+                    <div class="about-stats-row">
+                        <div class="stat-item">
+                            <span class="stat-num">15+</span>
+                            <span class="stat-lbl">Years</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">50+</span>
+                            <span class="stat-lbl">Products</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">20+</span>
+                            <span class="stat-lbl">Countries</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="about-image-col" data-aos="fade-left">
+                    <img src="assets/images/Boatimg.jpg" alt="Cargo Ship at Port" class="about-img" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Mission & Vision -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To connect global markets by delivering reliable, efficient, and high-quality export solutions.
+                        We strive to empower businesses worldwide through exceptional service, ethical practices, and a
+                        commitment to excellence, fostering long-lasting partnerships built on trust and mutual growth.
+                    </p>
+                </div>
+                <div class="mission-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="mission-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To be a global leader in export solutions, renowned for our innovation, integrity, and unwavering
+                        dedication to customer success. We aim to bridge international markets, creating a world where
+                        businesses thrive through seamless trade and sustainable partnerships.</p>
+                </div>
+                <div class="mission-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="mission-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Our Values</h3>
+                    <p>We believe in precision, purity, and performance. Every process is driven by advanced technology
+                        and strict adherence to global quality standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: What Makes Us Different -->
+    <section class="why-us-section">
+        <div class="container">
+            <h2 class="section-title text-center" data-aos="fade-up">What Makes Us Different</h2>
+            <div class="features-grid">
+                <div class="feature-box" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="fas fa-certificate feature-icon"></i>
+                    <h4>Trusted Excellence</h4>
+                    <p>Over 10 years of trusted manufacturing excellence in the pharma industry.</p>
+                </div>
+                <div class="feature-box" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-flask feature-icon"></i>
+                    <h4>GMP Compliant</h4>
+                    <p>GMP-compliant production with rigorous QC & QA at every stage.</p>
+                </div>
+                <div class="feature-box" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="fas fa-sliders-h feature-icon"></i>
+                    <h4>Customization</h4>
+                    <p>Customized grades, packaging, and documentation for client-specific needs.</p>
+                </div>
+                <div class="feature-box" data-aos="zoom-in" data-aos-delay="400">
+                    <i class="fas fa-globe-americas feature-icon"></i>
+                    <h4>Global Logistics</h4>
+                    <p>Robust global logistics ensuring safe, timely, and reliable delivery.</p>
+                </div>
+                <div class="feature-box" data-aos="zoom-in" data-aos-delay="500">
+                    <i class="fas fa-headset feature-icon"></i>
+                    <h4>Customer First</h4>
+                    <p>A customer-first approach backed by technical expertise and strong service.</p>
+                </div>
+                <div class="feature-box" data-aos="zoom-in" data-aos-delay="600">
+                    <i class="fas fa-leaf feature-icon"></i>
+                    <h4>Sustainability</h4>
+                    <p>Committed to sustainable practices and environmentally responsible manufacturing.</p>
+                </div>
+                <div class="feature-box" data-aos="zoom-in" data-aos-delay="700">
+                    <i class="fas fa-headset feature-icon"></i>
+                    <h4>Customer First</h4>
+                    <p>A customer-first approach backed by technical expertise and strong service.</p>
+                </div>
+                <div class="feature-box" data-aos="zoom-in" data-aos-delay="800">
+                    <i class="fas fa-flask feature-icon"></i>
+                    <h4>GMP Compliant</h4>
+                    <p>GMP-compliant production with rigorous QC & QA at every stage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="main-footer" data-aos="fade-up">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo-col">
+                    <div class="logo-container" style="background: transparent; color: white; padding: 0;">
+                        <img src="assets/images/DEVSEAS logo.png" alt="DevSeas" style="height:40px; width:auto;"
+                            loading="lazy">
+                    </div>
+                    <p>We are committed to empowering businesses worldwide by offering premium export solutions tailored
+                        to their unique needs. With extensive experience and a profound understanding of international
+                        markets, we take pride in delivering exceptional service, unmatched reliability, and outstanding
+                        value.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html" onclick="toggleDropdown(event, this)">Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Product Categories</h4>
+                    <ul>
+                        <li><a href="products.html">Pharmaceutical Excipients</a></li>
+                        <li><a href="products.html">Dextrose Products</a></li>
+                        <li><a href="products.html">Antacid Products</a></li>
+                        <li><a href="products.html">Industrial Chemicals</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <ul class="contact-info-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>FF-16 Kanha Luxuria, Savita Hospital Road, Parivar Char Rasta, Vadodara, Gujarat
+                                390025</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>
+                                <a href="tel:+4915560547524" style="color: inherit; text-decoration: none;">+49 15560
+                                    547524</a>,
+                                <a href="tel:+916352322122" style="color: inherit; text-decoration: none;">+91 63523
+                                    22122</a>
+                            </span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@devseasglobal.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom" style="flex-direction: column; gap: 15px;">
+                <div
+                    style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <p style="margin: 0;">&copy; 2026 DevSeas Global. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Quality Policy</a>
+                    </div>
+                </div>
+                <div class="powered-by"
+                    style="display: flex; align-items: center; gap: 10px; font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; width: 100%; justify-content: center;">
+                    <span style="color: #cbd5e1;">Powered by TejasKP AI Software</span>
+                    <a href="https://tejaskp.in/login" target="_blank" style="text-decoration: none;">
+                        <img src="assets/images/tejaskp_logo.png" alt="TejasKP AI Software"
+                            style="height: 25px; vertical-align: middle; filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));"
+                            loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optimized Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: false, mirror: true, offset: 100 });
+
+    </script>
+
+</body>
+
+</html>

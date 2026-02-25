@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://img.icons8.com">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Assurance - DevSeas Global</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Antigravity: AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo-container">
+                <img src="assets/images/DEVSEAS logo.png" alt="DEVSEAS Global" class="site-logo">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-item">
+                    <a href="products.html" onclick="toggleDropdown(event, this)">Products <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="products.html" class="dropdown-item">All Products</a>
+                        <a href="products.html" class="dropdown-item">Antacids & Laxatives</a>
+                        <a href="products.html" class="dropdown-item">Food & Beverages & Pharma</a>
+                        <a href="products.html" class="dropdown-item">ORS & Injectables</a>
+                        <a href="products.html" class="dropdown-item">Pharma & Nutraceuticals</a>
+                    </div>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="nav-item">
+                    <a href="services.html" onclick="toggleDropdown(event, this)">Services <i
+                            class="fas fa-chevron-down" style="font-size: 0.7em;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="services.html" class="dropdown-item">Chemical Trading</a>
+                        <a href="quality.html" class="dropdown-item">Quality Assurance</a>
+                        <a href="logistics.html" class="dropdown-item">Global Logistics</a>
+                    </div>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="/admin/login" class="nav-login-btn">Login <i class="fas fa-sign-in-alt"></i></a></li>
+            </ul>
+
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 data-aos="fade-down">Quality Assurance</h1>
+            <p data-aos="fade-up" data-aos-delay="200">DevSeas Global specializes in high-quality disposable fast food
+                paper products, including trays, bags, and wrappers. Designed for convenience and durability, our
+                eco-friendly solutions cater to the fast-paced food industry, ensuring food safety and ease of use for
+                restaurants and takeout services.</p>
+        </div>
+    </div>
+
+    <section class="certifications-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Certifications</h2>
+            </div>
+
+            <div class="cert-grid">
+                <!-- ISO 9001:2015 (Blue) -->
+                <div class="cert-card cert-blue" data-aos="fade-up" data-aos-delay="100">
+                    <div class="cert-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>ISO 9001:2015</h3>
+                    <p class="cert-subtitle">Quality Management System</p>
+                    <div class="cert-details">
+                        <span class="cert-badge">Valid until 2025</span>
+                    </div>
+                </div>
+
+                <!-- ISO 14001:2015 (Green) -->
+                <div class="cert-card cert-green" data-aos="fade-up" data-aos-delay="200">
+                    <div class="cert-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>ISO 14001:2015</h3>
+                    <p class="cert-subtitle">Environmental Management</p>
+                    <div class="cert-details">
+                        <span class="cert-badge">Valid until 2025</span>
+                    </div>
+                </div>
+
+                <!-- GMP Certified (Purple) -->
+                <div class="cert-card cert-purple" data-aos="fade-up" data-aos-delay="300">
+                    <div class="cert-icon">
+                        <i class="fas fa-check-square"></i>
+                    </div>
+                    <h3>GMP Certified</h3>
+                    <p class="cert-subtitle">Good Manufacturing Practice</p>
+                    <div class="cert-details">
+                        <span class="cert-badge">Valid until 2024</span>
+                    </div>
+                </div>
+
+                <!-- Halal Certified (Orange/Brown) -->
+                <div class="cert-card cert-orange" data-aos="fade-up" data-aos-delay="400">
+                    <div class="cert-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3>Halal Certified</h3>
+                    <p class="cert-subtitle">Halal Food Standards</p>
+                    <div class="cert-details">
+                        <span class="cert-badge">Valid until 2024</span>
+                    </div>
+                </div>
+
+                <!-- FDA Registered (Red) -->
+                <div class="cert-card cert-red" data-aos="fade-up" data-aos-delay="500">
+                    <div class="cert-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>FDA Registered</h3>
+                    <p class="cert-subtitle">Food & Drug Administration</p>
+                    <div class="cert-details">
+                        <span class="cert-badge">Valid until 2024</span>
+                    </div>
+                </div>
+
+                <!-- KOSHER Certified (Indigo) -->
+                <div class="cert-card cert-indigo" data-aos="fade-up" data-aos-delay="600">
+                    <div class="cert-icon">
+                        <i class="fas fa-star-of-david"></i>
+                    </div>
+                    <h3>KOSHER Certified</h3>
+                    <p class="cert-subtitle">Kosher Food Standards</p>
+                    <div class="cert-details">
+                        <span class="cert-badge">Valid until 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Standards Section -->
+    <section class="quality-standards-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Quality Standards</h2>
+            </div>
+            <div class="standards-grid">
+                <div class="standard-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="standard-icon"><i class="fas fa-microscope"></i></div>
+                    <h3>Premium Raw Material Selection</h3>
+                    <p>We source only from approved and certified suppliers to maintain unmatched purity and performance
+                    </p>
+                </div>
+                <div class="standard-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="standard-icon"><i class="fas fa-industry"></i></div>
+                    <h3>GMP-Compliant Production</h3>
+                    <p>All manufacturing processes follow strict Good Manufacturing Practices to guarantee uniformity,
+                        hygiene, and reliability</p>
+                </div>
+                <div class="standard-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="standard-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Advanced QC Testing</h3>
+                    <p>Every batch undergoes rigorous physical, chemical, and microbiological analysis using validated
+                        methods aligned with IP/BP/USP/EP/JP/FCC specifications</p>
+                </div>
+                <div class="standard-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="standard-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <h3>Full Traceability & Documentation</h3>
+                    <p>Each product comes with a complete set of MSDS, technical data sheets, and regulatory
+                        documentation, ensuring complete transparency and customer assurance</p>
+                </div>
+                <div class="standard-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="standard-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Culture of Continuous Improvement</h3>
+                    <p>Regular audits, training, and process enhancements help us maintain consistent global-standard
+                        quality</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commitment Section -->
+    <section class="commitment-section">
+        <div class="container">
+            <div class="commitment-banner" data-aos="fade-up">
+                <h2>Our Commitment</h2>
+                <p>We deliver safe, compliant, and high-performance ingredients designed to elevate the quality of
+                    pharmaceutical, nutraceutical, cosmetic, and food formulations. With precision-driven manufacturing
+                    and a quality-first mindset, Cure Molecules Pvt. Ltd. is your dependable partner for superior
+                    excipients and cosmetic ingredients.</p>
+            </div>
+            <div class="commitment-stats">
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>IP/BP/USP</h3>
+                    <p>Standard Grades</p>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>EP/JP/FCC</h3>
+                    <p>Custom Grades</p>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>99.8%</h3>
+                    <p>Quality Pass Rate</p>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>24h</h3>
+                    <p>Testing Turnaround</p>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="500">
+                    <h3>Zero</h3>
+                    <p>Quality Incidents</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="main-footer" data-aos="fade-up">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo-col">
+                    <div class="logo-container" style="background: transparent; color: white; padding: 0;">
+                        <img src="assets/images/DEVSEAS logo.png" alt="DevSeas" style="height:40px; width:auto;"
+                            loading="lazy">
+                    </div>
+                    <p>We are committed to empowering businesses worldwide by offering premium export solutions tailored
+                        to their unique needs. With extensive experience and a profound understanding of international
+                        markets, we take pride in delivering exceptional service, unmatched reliability, and outstanding
+                        value.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html" onclick="toggleDropdown(event, this)">Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Product Categories</h4>
+                    <ul>
+                        <li><a href="products.html">Pharmaceutical Excipients</a></li>
+                        <li><a href="products.html">Dextrose Products</a></li>
+                        <li><a href="products.html">Antacid Products</a></li>
+                        <li><a href="products.html">Industrial Chemicals</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <ul class="contact-info-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>FF-16 Kanha Luxuria, Savita Hospital Road, Parivar Char Rasta, Vadodara, Gujarat
+                                390025</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>
+                                <a href="tel:+4915560547524" style="color: inherit; text-decoration: none;">+49 15560
+                                    547524</a>,
+                                <a href="tel:+916352322122" style="color: inherit; text-decoration: none;">+91 63523
+                                    22122</a>
+                            </span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@devseasglobal.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom" style="flex-direction: column; gap: 15px;">
+                <div
+                    style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <p style="margin: 0;">&copy; 2026 DevSeas Global. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Quality Policy</a>
+                    </div>
+                </div>
+                <div class="powered-by"
+                    style="display: flex; align-items: center; gap: 10px; font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; width: 100%; justify-content: center;">
+                    <span style="color: #cbd5e1;">Powered by TejasKP AI Software</span>
+                    <a href="https://tejaskp.in/login" target="_blank" style="text-decoration: none;">
+                        <img src="assets/images/tejaskp_logo.png" alt="TejasKP AI Software"
+                            style="height: 25px; vertical-align: middle; filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));"
+                            loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- Optimized Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: false, mirror: true, offset: 100 });
+
+    </script>
+
+</body>
+
+</html>

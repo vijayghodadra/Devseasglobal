@@ -146,11 +146,14 @@ app.post('/api/categories', authenticateToken, async (req, res) => {
         const { name, description } = req.body;
         if (!name) return res.status(400).json({ error: 'Name is required' });
 
+        const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
         const category = await prisma.category.create({
-            data: { name, description }
+            data: { name, slug, description }
         });
         res.status(201).json(category);
     } catch (error) {
+        console.error('Error creating category:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
@@ -169,18 +172,20 @@ app.post('/api/products', authenticateToken, upload.single('image'), async (req,
         let { name, categoryId, description, price, isActive, cas_number, chemical_formula } = req.body;
         if (!name || !categoryId) return res.status(400).json({ error: 'Name and Category are required' });
 
+        const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Date.now().toString().slice(-4);
+
         const data = {
             name,
+            slug,
             description,
-            price: price ? parseFloat(price) : null,
             isActive: isActive !== "false" && isActive !== false,
             categoryId: parseInt(categoryId),
-            cas_number: cas_number || null,
-            chemical_formula: chemical_formula || null
+            casNumber: cas_number || null,
+            formula: chemical_formula || null
         };
 
         if (req.file) {
-            data.imageUrl = req.file.filename;
+            data.image = req.file.filename;
         }
 
         const product = await prisma.product.create({ data });

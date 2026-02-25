@@ -14,30 +14,28 @@
         }
 
         :root {
-            --sidebar-bg: #0f172a;
-            --sidebar-hover: #1e293b;
-            --sidebar-active: #2dd4bf;
+            --sidebar-bg: #111827;
+            --sidebar-hover: #1f2937;
+            --sidebar-active: #0f172a;
             --sidebar-text: #94a3b8;
-            --sidebar-text-active: #ffffff;
-            --topbar-bg: #ffffff;
-            --body-bg: #f1f5f9;
-            --card-bg: #ffffff;
             --primary: #2dd4bf;
             --primary-dark: #0d9488;
             --danger: #ef4444;
-            --success: #22c55e;
+            --danger-bg: #fee2e2;
             --warning: #f59e0b;
-            --info: #3b82f6;
-            --text: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --sidebar-w: 250px;
+            --warning-bg: #fef3c7;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #f1f5f9;
+            --text-main: #334155;
+            --text-muted: #94a3b8;
+            --sidebar-w: 260px;
         }
 
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
-            background: var(--body-bg);
-            color: var(--text);
+            background: var(--bg);
+            color: var(--text-main);
             display: flex;
             min-height: 100vh;
         }
@@ -54,16 +52,16 @@
             display: flex;
             flex-direction: column;
             z-index: 100;
-            transition: transform 0.3s;
         }
 
         .sidebar-logo {
             padding: 24px 20px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 10px;
         }
 
         .sidebar-logo .brand {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 800;
             color: #fff;
             letter-spacing: 0.5px;
@@ -82,7 +80,7 @@
 
         .sidebar-nav {
             flex: 1;
-            padding: 16px 12px;
+            padding: 10px 16px;
             overflow-y: auto;
         }
 
@@ -99,24 +97,23 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 12px;
+            padding: 10px 14px;
             border-radius: 8px;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
             color: var(--sidebar-text);
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: background 0.2s, color 0.2s;
-            cursor: pointer;
+            transition: 0.2s;
         }
 
         .sidebar-nav a:hover {
             background: var(--sidebar-hover);
-            color: #e2e8f0;
+            color: #fff;
         }
 
         .sidebar-nav a.active {
-            background: rgba(45, 212, 191, 0.12);
+            background: rgba(45, 212, 191, 0.15);
             color: var(--primary);
         }
 
@@ -127,8 +124,8 @@
         }
 
         .sidebar-footer {
-            padding: 16px 12px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .sidebar-footer button {
@@ -162,23 +159,22 @@
 
         /* Topbar */
         .topbar {
-            background: var(--topbar-bg);
+            background: var(--card-bg);
             border-bottom: 1px solid var(--border);
-            padding: 0 28px;
-            height: 64px;
+            padding: 0 32px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 50;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
         }
 
         .topbar-title {
             font-size: 1.15rem;
             font-weight: 700;
-            color: var(--text);
+            color: var(--text-main);
         }
 
         .topbar-right {
@@ -195,107 +191,39 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #0f172a;
+            color: #fff;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         /* Page content */
         .page-content {
-            padding: 28px;
+            padding: 32px;
             flex: 1;
         }
 
-        /* Cards */
         .card {
             background: var(--card-bg);
             border-radius: 12px;
             border: 1px solid var(--border);
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            margin-bottom: 24px;
             overflow: hidden;
-            margin-bottom: 20px;
         }
 
         .card-header {
-            padding: 16px 20px;
+            padding: 18px 24px;
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-weight: 600;
             font-size: 0.95rem;
+            color: var(--text-main);
         }
 
         .card-body {
-            padding: 20px;
-        }
-
-        /* Stat cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 28px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border-radius: 14px;
-            padding: 22px;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .stat-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            flex-shrink: 0;
-        }
-
-        .stat-icon.teal {
-            background: rgba(45, 212, 191, 0.12);
-            color: var(--primary);
-        }
-
-        .stat-icon.blue {
-            background: rgba(59, 130, 246, 0.12);
-            color: var(--info);
-        }
-
-        .stat-icon.amber {
-            background: rgba(245, 158, 11, 0.12);
-            color: var(--warning);
-        }
-
-        .stat-icon.green {
-            background: rgba(34, 197, 94, 0.12);
-            color: var(--success);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--text);
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* Table */
-        .table-wrap {
-            overflow-x: auto;
+            padding: 0;
         }
 
         table {
@@ -306,7 +234,7 @@
 
         thead th {
             background: #f8fafc;
-            padding: 10px 14px;
+            padding: 14px 24px;
             text-align: left;
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -317,7 +245,7 @@
         }
 
         tbody td {
-            padding: 12px 14px;
+            padding: 16px 24px;
             border-bottom: 1px solid var(--border);
             vertical-align: middle;
         }
@@ -330,7 +258,27 @@
             background: #f8fafc;
         }
 
-        /* Buttons */
+        .badge-teal {
+            background: rgba(45, 212, 191, 0.15);
+            color: var(--primary-dark);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: #2563eb;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            min-width: 25px;
+            text-align: center;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -339,42 +287,80 @@
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 600;
-            text-decoration: none;
             border: none;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .btn-sm {
-            padding: 5px 12px;
-            font-size: 0.8rem;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            border-radius: 6px;
         }
 
-        .btn-primary {
+        .btn-add {
             background: var(--primary);
-            color: #0f172a;
+            color: #022c22;
         }
 
-        .btn-primary:hover {
+        .btn-add:hover {
             background: var(--primary-dark);
             color: #fff;
         }
 
-        .btn-secondary {
-            background: #f1f5f9;
-            color: var(--text);
-            border: 1px solid var(--border);
+        .btn-edit {
+            background: var(--warning-bg);
+            color: var(--warning);
+            border: 1px solid #fde68a;
         }
 
-        .btn-secondary:hover {
-            background: #e2e8f0;
+        .btn-edit:hover {
+            background: #fef3c7;
+        }
+
+        .btn-delete {
+            background: var(--danger-bg);
+            color: var(--danger);
+            border: 1px solid #fecaca;
+        }
+
+        .btn-delete:hover {
+            background: #fee2e2;
+        }
+
+        .form-container {
+            display: none;
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            background: #f8fafc;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: border 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-logo">
             <div class="brand">DEV<span>SEAS</span></div>
@@ -382,195 +368,167 @@
         </div>
         <nav class="sidebar-nav">
             <div class="nav-section-label">Main</div>
-            <a href="admin-dashboard.html">
-                <span class="icon"><i class="fas fa-chart-line"></i></span> Dashboard
-            </a>
+            <a href="admin-dashboard.html"><span class="icon"><i class="fas fa-chart-line"></i></span> Dashboard</a>
             <div class="nav-section-label">Catalogue</div>
-            <a href="admin-categories.html" class="active">
-                <span class="icon"><i class="fas fa-tags"></i></span> Categories
-            </a>
-            <a href="admin-products.html">
-                <span class="icon"><i class="fas fa-flask"></i></span> Products
-            </a>
+            <a href="admin-categories.html" class="active"><span class="icon"><i class="fas fa-tags"></i></span>
+                Categories</a>
+            <a href="admin-products.html"><span class="icon"><i class="fas fa-flask"></i></span> Products</a>
             <div class="nav-section-label">Communication</div>
-            <a href="admin-dashboard.html">
-                <span class="icon"><i class="fas fa-envelope"></i></span> Inquiries
-            </a>
+            <a href="admin-dashboard.html"><span class="icon"><i class="fas fa-envelope"></i></span> Inquiries</a>
         </nav>
         <div class="sidebar-footer">
             <button onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</button>
         </div>
     </aside>
 
-    <!-- Main -->
     <div class="main-wrapper">
         <header class="topbar">
-            <div class="topbar-title">Categories Management</div>
+            <div class="topbar-title">Categories</div>
             <div class="topbar-right">
-                <span style="font-size:0.82rem; color: var(--text-muted);" id="welcomeName">Welcome, Admin</span>
-                </a>
-                </nav>
-                <div class="sidebar-footer">
-                    <button onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</button>
-                </div>
-                </aside>
+                <span style="font-size:0.85rem; color: var(--text-muted);" id="welcomeName">Welcome, Admin</span>
+                <div class="admin-avatar" id="welcomeInitial">A</div>
+            </div>
+        </header>
 
-                <!-- Main -->
-                <div class="main-wrapper">
-                    <header class="topbar">
-                        <div class="topbar-title">Categories Management</div>
-                        <div class="topbar-right">
-                            <span style="font-size:0.82rem; color: var(--text-muted);" id="welcomeName">Welcome,
-                                Admin</span>
-                            <div class="admin-avatar" id="welcomeInitial">A</div>
-                        </div>
-                    </header>
-
-                    <main class="page-content">
-                        <div class="card" style="margin-bottom: 20px;">
-                            <div class="card-header">
-                                <span><i class="fas fa-plus" style="color:#2dd4bf;margin-right:8px;"></i>Add New
-                                    Category</span>
-                            </div>
-                            <div class="card-body">
-                                <form id="addCategoryForm" style="display: flex; gap: 10px; align-items: flex-end;">
-                                    <div style="flex: 1;">
-                                        <label class="form-label">Category Name</label>
-                                        <input type="text" id="catName" class="form-control" required>
-                                    </div>
-                                    <div style="flex: 2;">
-                                        <label class="form-label">Description (Optional)</label>
-                                        <input type="text" id="catDesc" class="form-control">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary"
-                                        style="padding: 10px 20px;">Save</button>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <span><i class="fas fa-tags" style="color:#2dd4bf;margin-right:8px;"></i>All
-                                    Categories</span>
-                                <button class="btn btn-sm btn-secondary" onclick="fetchCategories()">Refresh</button>
-                            </div>
-                            <div class="card-body" style="padding:0;">
-                                <div class="table-wrap">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="categoriesTableBody">
-                                            <tr>
-                                                <td colspan="3" style="text-align:center; padding: 20px;">Loading...
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </main>
+        <main class="page-content">
+            <div class="card">
+                <div class="card-header">
+                    <span><i class="fas fa-tags" style="color:#2dd4bf;margin-right:8px;"></i> All Categories</span>
+                    <button class="btn btn-add" onclick="toggleForm()"><i class="fas fa-plus"></i> Add Category</button>
                 </div>
 
-                <script>
-                    // Authentication Check
-                    const token = localStorage.getItem('adminToken');
-                    const userStr = localStorage.getItem('adminUser');
+                <div class="form-container" id="categoryFormContainer">
+                    <form id="addCategoryForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div>
+                            <label class="form-label">Category Name *</label>
+                            <input type="text" id="catName" class="form-control" required>
+                        </div>
+                        <div>
+                            <label class="form-label">Description (Optional)</label>
+                            <input type="text" id="catDesc" class="form-control">
+                        </div>
 
-                    if (!token) {
-                        window.location.href = '/admin/login';
-                    }
+                        <div
+                            style="grid-column: span 2; display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+                            <button type="button" class="btn" style="background:#e2e8f0; color:#475569;"
+                                onclick="toggleForm()">Cancel</button>
+                            <button type="submit" class="btn btn-add"><i class="fas fa-check"></i> Save
+                                Category</button>
+                        </div>
+                    </form>
+                </div>
 
-                    if (userStr) {
-                        const user = JSON.parse(userStr);
-                        document.getElementById('welcomeName').textContent = `Welcome, ${user.name}`;
-                        document.getElementById('welcomeInitial').textContent = user.name.charAt(0).toUpperCase();
-                    }
+                <div class="card-body">
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Slug</th>
+                                    <th>Products</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categoriesTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align:center; padding: 30px; color:#94a3b8;">Loading...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
-                    function logout() {
-                        localStorage.removeItem('adminToken');
-                        localStorage.removeItem('adminUser');
-                        window.location.href = '/admin/login';
-                    }
+    <script>
+        const token = localStorage.getItem('adminToken');
+        const userStr = localStorage.getItem('adminUser');
+        if (!token) window.location.href = '/admin/login';
+        if (userStr) {
+            const user = JSON.parse(userStr);
+            document.getElementById('welcomeName').textContent = `Welcome, ${user.name}`;
+            document.getElementById('welcomeInitial').textContent = user.name.charAt(0).toUpperCase();
+        }
+        function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUser');
+            window.location.href = '/admin/login';
+        }
 
-                    // Initial load
-                    fetchCategories();
+        function toggleForm() {
+            const container = document.getElementById('categoryFormContainer');
+            if (container.style.display === 'block') {
+                container.style.display = 'none';
+                document.getElementById('addCategoryForm').reset();
+            } else {
+                container.style.display = 'block';
+            }
+        }
 
-                    async function fetchCategories() {
-                        try {
-                            const res = await fetch('/api/categories');
-                            const categories = await res.json();
+        fetchCategories();
 
-                            const tbody = document.getElementById('categoriesTableBody');
-                            if (categories.length === 0) {
-                                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color:#94a3b8;"><i class="fas fa-tags" style="font-size:2rem; margin-bottom:10px; display:block;"></i> No categories yet.</td></tr>';
-                            } else {
-                                let html = '';
-                                categories.forEach(cat => {
-                                    html += `
+        async function fetchCategories() {
+            try {
+                const res = await fetch('/api/categories');
+                const categories = await res.json();
+                const tbody = document.getElementById('categoriesTableBody');
+
+                if (categories.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 40px; color:#94a3b8;"><i class="fas fa-tags" style="font-size:2.5rem; margin-bottom:12px; opacity:0.3;"></i><br>No categories found.</td></tr>';
+                } else {
+                    let html = '';
+                    categories.forEach(cat => {
+                        html += `
                         <tr>
-                            <td><strong>${cat.name}</strong></td>
-                            <td style="color:#64748b;">${cat.description || '—'}</td>
+                            <td style="color:#94a3b8;">${cat.id}</td>
+                            <td><strong style="color:#0f172a;">${cat.name}</strong></td>
+                            <td><span class="badge-teal">${cat.slug}</span></td>
+                            <td><span class="badge-blue">${cat.products ? cat.products.length : 0}</span></td>
+                            <td style="color:#94a3b8; font-size:0.8rem;">${new Date(cat.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
                             <td>
-                                <button class="btn btn-danger btn-sm" onclick="deleteCategory(${cat.id})"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-sm btn-edit" onclick="alert('Inline editing coming soon!')"><i class="fas fa-pen"></i> Edit</button>
+                                <button class="btn btn-sm btn-delete" onclick="deleteCategory(${cat.id})"><i class="fas fa-trash"></i> Delete</button>
                             </td>
                         </tr>
                         `;
-                                });
-                                tbody.innerHTML = html;
-                            }
-                        } catch (err) {
-                            console.error(err);
-                            document.getElementById('categoriesTableBody').innerHTML = '<tr><td colspan="3" style="color: red; text-align:center; padding: 20px;">Error loading data.</td></tr>';
-                        }
-                    }
-
-                    document.getElementById('addCategoryForm').addEventListener('submit', async (e) => {
-                        e.preventDefault();
-                        const name = document.getElementById('catName').value;
-                        const description = document.getElementById('catDesc').value;
-
-                        try {
-                            const res = await fetch('/api/categories', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Authorization': `Bearer ${token}`
-                                },
-                                body: JSON.stringify({ name, description })
-                            });
-
-                            if (res.ok) {
-                                document.getElementById('addCategoryForm').reset();
-                                fetchCategories();
-                            } else {
-                                alert('Failed to add category');
-                            }
-                        } catch (err) {
-                            console.error(err);
-                        }
                     });
+                    tbody.innerHTML = html;
+                }
+            } catch (err) { console.error(err); }
+        }
 
-                    async function deleteCategory(id) {
-                        if (!confirm('Are you sure you want to delete this category?')) return;
-                        try {
-                            const res = await fetch(`/api/categories/${id}`, {
-                                method: 'DELETE',
-                                headers: { 'Authorization': `Bearer ${token}` }
-                            });
-                            if (res.ok) fetchCategories();
-                        } catch (err) {
-                            console.error(err);
-                        }
-                    }
+        document.getElementById('addCategoryForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('catName').value;
+            const description = document.getElementById('catDesc').value;
+            try {
+                const res = await fetch('/api/categories', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ name, description })
+                });
+                if (res.ok) {
+                    toggleForm();
+                    fetchCategories();
+                } else { alert('Failed to add category'); }
+            } catch (err) { console.error(err); }
+        });
 
-                </script>
-
+        async function deleteCategory(id) {
+            if (!confirm('Are you sure you want to delete this category?')) return;
+            try {
+                const res = await fetch(`/api/categories/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) fetchCategories();
+            } catch (err) { console.error(err); }
+        }
+    </script>
 </body>
 
 </html>

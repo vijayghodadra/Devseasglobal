@@ -133,7 +133,7 @@ app.get('/admin/login', (req, res) => {
 });
 
 // Fallback to index.html for single-page app or static HTML navigation
-app.get('*', (req, res) => {
+app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 

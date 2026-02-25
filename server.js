@@ -65,6 +65,11 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
+// Admin Login Route mapping
+app.get('/admin/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin-login.html'));
+});
+
 // Fallback to index.html for single-page app or static HTML navigation
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));

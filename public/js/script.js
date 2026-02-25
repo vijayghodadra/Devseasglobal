@@ -39,6 +39,31 @@ document.addEventListener('DOMContentLoaded', () => {
             themeToggle.innerHTML = isLight ? ICON_DARK : ICON_LIGHT;
         });
     }
+
+    // --- Dynamic Navbar Categories Logic ---
+    async function loadNavbarCategories() {
+        const dynamicWrappers = document.querySelectorAll('.dropdown-categories-dynamic');
+        if (dynamicWrappers.length === 0) return;
+
+        try {
+            const res = await fetch('/api/categories');
+            if (!res.ok) throw new Error('Failed to fetch');
+            const categories = await res.json();
+
+            dynamicWrappers.forEach(wrapper => {
+                // Keep the 'All Products' link, append the rest
+                let html = '<a href="products.html?category=all" class="dropdown-item">All Products</a>';
+                categories.forEach(cat => {
+                    html += `<a href="products.html?category=${cat.slug}" class="dropdown-item">${cat.name}</a>`;
+                });
+                wrapper.innerHTML = html;
+            });
+        } catch (error) {
+            console.error('Error loading navbar categories:', error);
+        }
+    }
+
+    loadNavbarCategories();
 });
 
 // Mobile Dropdown Toggle (Global function called by onclick)

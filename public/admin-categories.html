@@ -399,6 +399,7 @@
 
                 <div class="form-container" id="categoryFormContainer">
                     <form id="addCategoryForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <input type="hidden" id="editCatId">
                         <div>
                             <label class="form-label">Category Name *</label>
                             <input type="text" id="catName" class="form-control" required>
@@ -464,9 +465,18 @@
             if (container.style.display === 'block') {
                 container.style.display = 'none';
                 document.getElementById('addCategoryForm').reset();
+                document.getElementById('editCatId').value = '';
             } else {
                 container.style.display = 'block';
             }
+        }
+
+        function editCategory(id, name, desc) {
+            document.getElementById('editCatId').value = id;
+            document.getElementById('catName').value = name;
+            document.getElementById('catDesc').value = desc && desc !== 'null' ? desc : '';
+            document.getElementById('categoryFormContainer').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         fetchCategories();
@@ -490,7 +500,7 @@
                             <td><span class="badge-blue">${cat.products ? cat.products.length : 0}</span></td>
                             <td style="color:#94a3b8; font-size:0.8rem;">${new Date(cat.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
                             <td>
-                                <button class="btn btn-sm btn-edit" onclick="alert('Inline editing coming soon!')"><i class="fas fa-pen"></i> Edit</button>
+                                <button class="btn btn-sm btn-edit" onclick="editCategory(${cat.id}, '${cat.name.replace(/'/g, "\\'")}', '${cat.description ? cat.description.replace(/'/g, "\\'") : ''}')"><i class="fas fa-pen"></i> Edit</button>
                                 <button class="btn btn-sm btn-delete" onclick="deleteCategory(${cat.id})"><i class="fas fa-trash"></i> Delete</button>
                             </td>
                         </tr>
@@ -503,18 +513,25 @@
 
         document.getElementById('addCategoryForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            const id = document.getElementById('editCatId').value;
             const name = document.getElementById('catName').value;
             const description = document.getElementById('catDesc').value;
             try {
-                const res = await fetch('/api/categories', {
-                    method: 'POST',
+                let url = '/api/categories';
+                let method = 'POST';
+                if (id) {
+                    url = `/api/categories/${id}`;
+                    method = 'PUT';
+                }
+                const res = await fetch(url, {
+                    method: method,
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify({ name, description })
                 });
                 if (res.ok) {
                     toggleForm();
                     fetchCategories();
-                } else { alert('Failed to add category'); }
+                } else { alert('Failed to save category'); }
             } catch (err) { console.error(err); }
         });
 

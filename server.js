@@ -165,6 +165,27 @@ app.post('/api/categories', authenticateToken, async (req, res) => {
     }
 });
 
+app.put('/api/categories/:id', authenticateToken, async (req, res) => {
+    try {
+        const { name, description } = req.body;
+        const data = {};
+        if (name) {
+            data.name = name;
+            data.slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+        }
+        if (description !== undefined) data.description = description;
+
+        const category = await prisma.category.update({
+            where: { id: parseInt(req.params.id) },
+            data
+        });
+        res.json(category);
+    } catch (error) {
+        console.error('Error updating category:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 app.delete('/api/categories/:id', authenticateToken, async (req, res) => {
     try {
         await prisma.category.delete({ where: { id: parseInt(req.params.id) } });

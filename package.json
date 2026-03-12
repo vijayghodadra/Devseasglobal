@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "prisma generate",
     "start": "node server.js",
-    "build": "prisma generate && prisma db push --accept-data-loss && node prisma/seed.js",
+    "build": "prisma generate && prisma db push --accept-data-loss --skip-generate && node prisma/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

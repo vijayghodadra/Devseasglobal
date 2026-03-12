@@ -11,6 +11,11 @@ const prisma = new PrismaClient();
 const app = express();
 const JWT_SECRET = process.env.JWT_SECRET || 'devseas_super_secret_key_2026';
 
+// Test Database Connection
+prisma.$connect()
+    .then(() => console.log('✅ Successfully connected to Database'))
+    .catch(err => console.error('❌ Database connection error:', err));
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -47,7 +52,7 @@ app.get('/api/products', async (req, res) => {
         res.json(products);
     } catch (error) {
         console.error('Error fetching products:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error', details: error.message });
     }
 });
 
@@ -59,7 +64,7 @@ app.get('/api/categories', async (req, res) => {
         res.json(categories);
     } catch (error) {
         console.error('Error fetching categories:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error', details: error.message });
     }
 });
 

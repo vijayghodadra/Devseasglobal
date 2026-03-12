@@ -7,9 +7,23 @@ const multer = require('multer');
 const fs = require('fs');
 const { PrismaClient } = require('@prisma/client');
 
+const { execSync } = require('child_process');
 const prisma = new PrismaClient();
 const app = express();
 const JWT_SECRET = process.env.JWT_SECRET || 'devseas_super_secret_key_2026';
+
+// Sync Database on Startup (for Render)
+try {
+    console.log('🔄 Syncing database schema...');
+    execSync('npx prisma db push --accept-data-loss --skip-generate', { stdio: 'inherit' });
+    console.log('✅ Database schema synced');
+    
+    // Run seed 
+    execSync('node prisma/seed.js', { stdio: 'inherit' });
+    console.log('✅ Database seeded');
+} catch (err) {
+    console.error('❌ Database sync failed:', err.message);
+}
 
 // Test Database Connection
 prisma.$connect()

@@ -301,12 +301,15 @@
                     const catName = p.category ? p.category.name : 'Uncategorized';
                     const cas = p.casNumber || 'N/A';
                     const desc = p.description || '';
+                    const stockStatus = p.stockStatus || 'In Stock';
+                    const grade = p.grade || 'IP/BP/USP';
+                    const stockColor = stockStatus === 'In Stock' ? '#10b981' : stockStatus === 'Limited Stock' ? '#f59e0b' : stockStatus === 'Out of Stock' ? '#ef4444' : '#6366f1';
 
                     productGrid.innerHTML += `
                     <div class="product-card-enhanced" data-aos="fade-up" data-aos-delay="${(delayCounter * 100) + 100}">
                         <div class="pc-header">
-                            <span class="stock-status">In Stock</span>
-                            <span class="grade-badge">IP/BP/USP</span>
+                            <span class="stock-status" style="background:${stockColor}20; color:${stockColor}; border:1px solid ${stockColor}40;">${stockStatus}</span>
+                            <span class="grade-badge">${grade}</span>
                         </div>
                         <div class="pc-image-container">
                             <img src="${imgUrl}" alt="${p.name}" loading="lazy" onerror="this.onerror=null; this.src='https://img.icons8.com/color/96/pill.png';" style="max-height:100px; width:auto; object-fit:contain; background: transparent;">

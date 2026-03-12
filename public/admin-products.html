@@ -415,6 +415,19 @@
                             <label class="form-label">Short Description</label>
                             <input type="text" id="prodDesc" name="description" class="form-control">
                         </div>
+                        <div>
+                            <label class="form-label">Stock Status <small style="color:#94a3b8;font-weight:400;">(shown on card top-left)</small></label>
+                            <select id="prodStockStatus" name="stock_status" class="form-control">
+                                <option value="In Stock">In Stock</option>
+                                <option value="Out of Stock">Out of Stock</option>
+                                <option value="Limited Stock">Limited Stock</option>
+                                <option value="On Request">On Request</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Grade / Specification <small style="color:#94a3b8;font-weight:400;">(shown on card top-right)</small></label>
+                            <input type="text" id="prodGrade" name="grade" class="form-control" placeholder="e.g. IP/BP/USP, Tech Grade, Food Grade">
+                        </div>
                         <div
                             style="grid-column: span 2; display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
                             <button type="button" class="btn" style="background:#e2e8f0; color:#475569;"
@@ -552,6 +565,8 @@
             document.getElementById('prodCas').value = product.casNumber || '';
             document.getElementById('prodFormula').value = product.formula || '';
             document.getElementById('prodDesc').value = product.description || '';
+            document.getElementById('prodStockStatus').value = product.stockStatus || 'In Stock';
+            document.getElementById('prodGrade').value = product.grade || 'IP/BP/USP';
 
             document.getElementById('addBtnText').innerText = "Edit Product";
             document.getElementById('submitBtnText').innerText = "Update Product";

@@ -505,7 +505,9 @@
         async function loadCategories() {
             try {
                 const res = await fetch('/api/categories');
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const categories = await res.json();
+                if (!Array.isArray(categories)) throw new Error('Invalid response');
                 const select = document.getElementById('prodCategory');
                 categories.forEach(cat => {
                     const option = document.createElement('option');
@@ -513,18 +515,23 @@
                     option.textContent = cat.name;
                     select.appendChild(option);
                 });
-            } catch (err) { console.error(err); }
+            } catch (err) {
+                console.error('Categories load error:', err);
+            }
         }
 
         async function fetchProducts() {
+            const tbody = document.getElementById('productsTableBody');
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 30px; color:#94a3b8;">Loading...</td></tr>';
             try {
                 const res = await fetch('/api/products');
+                if (!res.ok) throw new Error(`Server error: HTTP ${res.status}`);
                 const products = await res.json();
-                pList = products; // store globally for editing
-                const tbody = document.getElementById('productsTableBody');
+                if (!Array.isArray(products)) throw new Error('Invalid data from server');
+                pList = products;
 
                 if (products.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 40px; color:#94a3b8;"><i class="fas fa-flask" style="font-size:2.5rem; margin-bottom:12px; opacity:0.3;"></i><br>No products found.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 40px; color:#94a3b8;"><i class="fas fa-flask" style="font-size:2.5rem; margin-bottom:12px; opacity:0.3;"></i><br>No products found. Click "Add Product" to get started.</td></tr>';
                 } else {
                     let html = '';
                     products.forEach(p => {
@@ -551,7 +558,10 @@
                     });
                     tbody.innerHTML = html;
                 }
-            } catch (err) { console.error(err); }
+            } catch (err) {
+                console.error('Products load error:', err);
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 40px; color:#ef4444;"><i class="fas fa-exclamation-triangle" style="font-size:2rem; margin-bottom:12px;"></i><br>Failed to load products.<br><small style="color:#94a3b8;">${err.message}</small><br><br><button class="btn btn-add" onclick="fetchProducts()">Retry</button></td></tr>`;
+            }
         }
 
         function editProduct(id) {

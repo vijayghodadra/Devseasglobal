@@ -72,17 +72,8 @@ body.light-mode {
     box-sizing: border-box;
 }
 
-html,
-body {
-    overflow-x: hidden;
-}
 
-body {
-    font-family: 'Inter', sans-serif;
-    color: var(--text-white);
-    background-color: var(--body-bg);
-    transition: background-color 0.4s ease, color 0.4s ease;
-}
+
 
 /* ===========================
    HEADER / NAVBAR
@@ -249,7 +240,8 @@ header {
     margin-top: 0;
     overflow: hidden;
     background: #0f172a;
-    line-height: 0; /* Clear vertical gaps */
+    line-height: 0;
+    /* Clear vertical gaps */
 }
 
 .slider-wrapper {
@@ -275,8 +267,13 @@ header {
 }
 
 @keyframes slideFadeEffect {
-    from { opacity: 0.5; }
-    to { opacity: 1; }
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .slider-nav {
@@ -299,7 +296,8 @@ header {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.dot.active, .dot:hover {
+.dot.active,
+.dot:hover {
     background-color: var(--primary);
     transform: scale(1.3);
     border-color: var(--primary);
@@ -310,6 +308,7 @@ header {
     .slider-nav {
         bottom: 15px;
     }
+
     .dot {
         height: 10px;
         width: 10px;
@@ -3344,4 +3343,19 @@ body.light-mode .contact-map {
 
 body.light-mode .footer-bottom {
     border-top: 1px solid var(--border-color) !important;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-y: auto;
+}
+
+section {
+    overflow: visible;
 }

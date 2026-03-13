@@ -72,8 +72,20 @@ body.light-mode {
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
-
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-white);
+    background-color: var(--body-bg);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
 
 /* ===========================
    HEADER / NAVBAR

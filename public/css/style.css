@@ -649,6 +649,157 @@ footer {
     font-size: 0.9rem;
 }
 
+/* ===========================
+   ENHANCED FOOTER STYLES
+=========================== */
+.main-footer {
+    background: linear-gradient(180deg, #0a1628 0%, #020617 100%);
+    padding: 70px 0 0;
+    margin-top: 80px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-logo-col p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-top: 18px;
+}
+
+.footer-links h4,
+.footer-heading {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 12px;
+}
+
+.footer-links ul li a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.25s, padding-left 0.25s;
+}
+
+.footer-links ul li a:hover {
+    color: var(--primary);
+    padding-left: 4px;
+}
+
+/* Contact info list in footer */
+.contact-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: #94a3b8;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.contact-info-list li i {
+    color: var(--primary);
+    font-size: 0.95rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 16px;
+}
+
+.contact-info-list li a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.contact-info-list li a:hover {
+    color: var(--primary);
+}
+
+/* Social icons */
+.social-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.social-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.25s;
+}
+
+.social-icon:hover {
+    background: var(--primary);
+    color: #0f172a;
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Footer bottom bar */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bottom-links a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.25s;
+}
+
+.footer-bottom-links a:hover {
+    color: var(--primary);
+}
+
+
+
 /* Responsive */
 /* Mobile Navigation Toggle */
 .menu-toggle {
@@ -3359,3 +3510,330 @@ body.light-mode .footer-bottom {
 section {
     overflow: visible;
 }
+
+/* ===========================
+   COMPREHENSIVE MOBILE RESPONSIVE
+   (All Pages Fix)
+=========================== */
+
+/* ---- Tablet (≤ 992px) ---- */
+@media (max-width: 992px) {
+
+    /* Footer grid: 2 columns on tablet */
+    .footer-top {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 30px !important;
+    }
+
+    /* Contact info section cards */
+    .contact-info-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 25px !important;
+    }
+
+    /* About grid */
+    .about-grid {
+        flex-direction: column !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    .about-text-col,
+    .about-image-col {
+        width: 100% !important;
+    }
+
+    .about-img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Mission / features grid */
+    .mission-grid,
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Page header */
+    .page-header h1 {
+        font-size: 2.2rem !important;
+    }
+
+    /* Section title */
+    .section-title {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* ---- Mobile (≤ 768px) ---- */
+@media (max-width: 768px) {
+
+    /* Container padding */
+    .container {
+        width: 95% !important;
+    }
+
+    /* Footer: single column */
+    .footer-top {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+        text-align: center !important;
+    }
+
+    .footer-logo-col {
+        text-align: center !important;
+    }
+
+    .footer-links {
+        text-align: center !important;
+    }
+
+    /* Footer contact list: center align icons+text */
+    .contact-info-list {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+
+    .contact-info-list li {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+        text-align: left !important;
+        max-width: 320px !important;
+    }
+
+    .social-icons {
+        justify-content: center !important;
+    }
+
+    /* Footer bottom links */
+    .footer-bottom {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 10px !important;
+    }
+
+    .footer-bottom-links {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+    }
+
+    /* Contact info cards: single column */
+    .contact-info-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* Contact card inner layout */
+    .c-info-card {
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 15px !important;
+    }
+
+    /* Page header */
+    .page-header {
+        padding: 50px 0 !important;
+        margin-bottom: 30px !important;
+    }
+
+    .page-header h1 {
+        font-size: 1.9rem !important;
+    }
+
+    .page-header p {
+        font-size: 1rem !important;
+    }
+
+    /* Sections padding */
+    .categories-section,
+    .featured-section,
+    .cert-section,
+    .mission-section,
+    .why-us-section,
+    .about-section,
+    .trading-services-section,
+    .portfolio-section,
+    .certifications-section,
+    .quality-standards-section,
+    .commitment-section,
+    .logistics-banner-section,
+    .logistics-features-section,
+    .shipping-options-section,
+    .promise-section {
+        padding: 60px 0 !important;
+    }
+
+    /* Section headers */
+    .section-header h2 {
+        font-size: 1.7rem !important;
+    }
+
+    /* Mission, features: 1 column */
+    .mission-grid,
+    .features-grid,
+    .standards-grid,
+    .trading-grid,
+    .logistics-grid,
+    .commitment-stats,
+    .shipping-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
+    /* About */
+    .about-grid {
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+
+    .about-stats-row {
+        justify-content: center !important;
+    }
+
+    /* Products filter */
+    .filter-row {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+
+    .search-group,
+    .filter-group {
+        width: 100% !important;
+    }
+
+    /* Contact form */
+    .form-row {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+
+    .checkbox-grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+        flex-wrap: wrap !important;
+        gap: 5px !important;
+    }
+
+    /* Contact page header */
+    .contact-header-section h1 {
+        font-size: 2rem !important;
+    }
+
+    .contact-header-section {
+        padding: 50px 0 !important;
+    }
+
+    /* Portfolio grid */
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* About stats */
+    .about-stats-row {
+        flex-wrap: wrap !important;
+        gap: 15px !important;
+    }
+
+    /* Navbar fix */
+    .logo-container {
+        max-width: 160px !important;
+    }
+
+    .site-logo {
+        height: 36px !important;
+    }
+}
+
+/* ---- Small Mobile (≤ 480px) ---- */
+@media (max-width: 480px) {
+
+    /* Footer fully centered */
+    .footer-top {
+        grid-template-columns: 1fr !important;
+    }
+
+    .contact-info-list li {
+        max-width: 100% !important;
+    }
+
+    /* Page header */
+    .page-header h1 {
+        font-size: 1.6rem !important;
+    }
+
+    /* Contact page */
+    .contact-header-section h1 {
+        font-size: 1.6rem !important;
+    }
+
+    /* Certs single column */
+    .cert-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Category grid single column */
+    .category-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 !important;
+    }
+
+    /* Featured grid single */
+    .featured-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 !important;
+    }
+
+    /* Portfolio single */
+    .portfolio-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Checkbox single column */
+    .checkbox-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Contact info map */
+    .contact-map iframe {
+        height: 250px !important;
+    }
+
+    /* Buttons fullwidth */
+    .btn-submit {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    /* About stats */
+    .stat-item {
+        flex: 0 0 100% !important;
+        text-align: center !important;
+    }
+
+    /* Section headers */
+    .section-header h2 {
+        font-size: 1.5rem !important;
+    }
+
+    /* Nav logo */
+    .site-logo {
+        height: 30px !important;
+    }
+
+    .logo-container {
+        padding: 5px 8px !important;
+    }
+
+    /* Powered by footer */
+    .powered-by {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 5px !important;
+    }
+}

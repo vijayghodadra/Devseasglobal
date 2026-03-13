@@ -1424,13 +1424,14 @@ footer {
 
 .footer-bottom {
     border-top: 1px solid #1e293b;
-    padding-top: 30px;
+    padding: 25px 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: #64748b;
     font-size: 0.85rem;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
 }
 
 .footer-bottom-links {
@@ -2943,14 +2944,23 @@ footer {
     /* Hero */
     .hero {
         padding: 60px 0 40px;
+        height: auto;
     }
 
     .hero h1 {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
+    }
+
+    .site-logo {
+        height: 34px;
+    }
+
+    .logo-container {
+        padding: 4px 10px;
     }
 
     .company-name-hero {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
 
     .info-box {
@@ -3002,7 +3012,13 @@ footer {
     /* Footer — Stack all */
     .footer-top {
         grid-template-columns: 1fr !important;
-        gap: 20px;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
     }
 
     .footer-logo-col,

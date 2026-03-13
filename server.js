@@ -14,17 +14,26 @@ const JWT_SECRET = process.env.JWT_SECRET || 'devseas_super_secret_key_2026';
 
 // Sync Database on Startup (for Render)
 try {
-    console.log('🔄 Syncing database schema...');
-    execSync('npx prisma db push --accept-data-loss --skip-generate', { stdio: 'inherit' });
-    console.log('✅ Database schema synced');
+    const dbUrl = process.env.DATABASE_URL || '';
+    const protocol = dbUrl.split(':')[0];
+    console.log(`🔗 Detected Database Protocol: ${protocol}`);
     
-    // Run seed 
-    execSync('node prisma/seed.js', { stdio: 'inherit' });
-    console.log('✅ Database seeded');
+    if (dbUrl) {
+        console.log('🔄 Syncing database schema...');
+        // We remove --skip-generate to ensure the client is always fresh on the server
+        execSync('npx prisma db push --accept-data-loss', { stdio: 'inherit' });
+        console.log('✅ Database schema synced');
+        
+        // Run seed 
+        execSync('node prisma/seed.js', { stdio: 'inherit' });
+        console.log('✅ Database seeded');
+    } else {
+        console.error('❌ DATABASE_URL is not defined in environment variables.');
+    }
 } catch (err) {
-    console.error('❌ Database sync failed:', err.message);
-    if (err.message.includes('P1001')) {
-        console.error('💡 TIP: Check if your Database server is running and the DATABASE_URL is correct.');
+    console.error('❌ Database sync/seed failed:', err.message);
+    if (err.message.includes('P1001') || err.message.includes('protocol')) {
+        console.error('💡 TIP: Check if your DATABASE_URL on Render starts with "postgresql://" (if using Render DB) or "mysql://" (if using external MySQL).');
     }
 }
 

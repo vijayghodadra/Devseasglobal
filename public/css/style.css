@@ -3357,17 +3357,6 @@ body.light-mode .footer-bottom {
     border-top: 1px solid var(--border-color) !important;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-body {
-    overflow-y: auto;
-}
-
 section {
     overflow: visible;
 }

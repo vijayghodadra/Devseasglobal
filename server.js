@@ -23,6 +23,9 @@ try {
     console.log('✅ Database seeded');
 } catch (err) {
     console.error('❌ Database sync failed:', err.message);
+    if (err.message.includes('P1001')) {
+        console.error('💡 TIP: Check if your Database server is running and the DATABASE_URL is correct.');
+    }
 }
 
 // Test Database Connection
@@ -137,7 +140,11 @@ app.post('/api/login', async (req, res) => {
         res.json({ success: true, token, user: { id: user.id, email: user.email, name: user.name } });
     } catch (error) {
         console.error('Login error:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ 
+            error: 'Internal server error', 
+            message: error.message,
+            code: error.code || 'UNKNOWN_ERROR'
+        });
     }
 });
 

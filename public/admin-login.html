@@ -27,7 +27,6 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            overflow: hidden;
         }
 
         body::before {
@@ -242,7 +241,8 @@
                     localStorage.setItem('adminUser', JSON.stringify(data.user));
                     window.location.href = '/admin-dashboard.html';
                 } else {
-                    errorDiv.textContent = data.error || 'Authentication failed';
+                    const errorMsg = data.message ? `${data.error}: ${data.message}` : (data.error || 'Authentication failed');
+                    errorDiv.textContent = errorMsg;
                     errorDiv.style.display = 'block';
                 }
             } catch (error) {

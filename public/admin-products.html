@@ -416,13 +416,8 @@
                             <input type="text" id="prodDesc" name="description" class="form-control">
                         </div>
                         <div>
-                            <label class="form-label">Stock Status <small style="color:#94a3b8;font-weight:400;">(shown on card top-left)</small></label>
-                            <select id="prodStockStatus" name="stock_status" class="form-control">
-                                <option value="In Stock">In Stock</option>
-                                <option value="Out of Stock">Out of Stock</option>
-                                <option value="Limited Stock">Limited Stock</option>
-                                <option value="On Request">On Request</option>
-                            </select>
+                            <label class="form-label">Purity / Percentage <small style="color:#94a3b8;font-weight:400;">(shown on card top-left)</small></label>
+                            <input type="text" id="prodPurity" name="purity" class="form-control" placeholder="e.g. 99%, 99.5%, Pure">
                         </div>
                         <div>
                             <label class="form-label">Grade / Specification <small style="color:#94a3b8;font-weight:400;">(shown on card top-right)</small></label>
@@ -575,8 +570,8 @@
             document.getElementById('prodCas').value = product.casNumber || '';
             document.getElementById('prodFormula').value = product.formula || '';
             document.getElementById('prodDesc').value = product.description || '';
-            document.getElementById('prodStockStatus').value = product.stockStatus || 'In Stock';
-            document.getElementById('prodGrade').value = product.grade || 'IP/BP/USP';
+            document.getElementById('prodPurity').value = product.purity || '';
+            document.getElementById('prodGrade').value = product.grade || '';
 
             document.getElementById('addBtnText').innerText = "Edit Product";
             document.getElementById('submitBtnText').innerText = "Update Product";

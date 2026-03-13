@@ -43,7 +43,7 @@ model Product {
   formula     String?
   description String?   
   image       String?
-  stockStatus String?   @default("In Stock") @map("stock_status")
+  purity      String?   @default("99%") @map("purity")
   grade       String?   @default("IP/BP/USP")
   isActive    Boolean   @default(true) @map("is_active")
   createdAt   DateTime  @default(now()) @map("created_at")

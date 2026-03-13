@@ -216,7 +216,7 @@ app.delete('/api/categories/:id', authenticateToken, async (req, res) => {
 
 app.post('/api/products', authenticateToken, upload.single('image'), async (req, res) => {
     try {
-        let { name, categoryId, description, price, isActive, cas_number, chemical_formula, stock_status, grade } = req.body;
+        let { name, categoryId, description, price, isActive, cas_number, chemical_formula, purity, grade } = req.body;
         if (!name || !categoryId) return res.status(400).json({ error: 'Name and Category are required' });
 
         const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Date.now().toString().slice(-4);
@@ -229,7 +229,7 @@ app.post('/api/products', authenticateToken, upload.single('image'), async (req,
             categoryId: parseInt(categoryId),
             casNumber: cas_number || null,
             formula: chemical_formula || null,
-            stockStatus: stock_status || 'In Stock',
+            purity: purity || '99%',
             grade: grade || 'IP/BP/USP'
         };
 
@@ -247,7 +247,7 @@ app.post('/api/products', authenticateToken, upload.single('image'), async (req,
 
 app.put('/api/products/:id', authenticateToken, upload.single('image'), async (req, res) => {
     try {
-        let { name, categoryId, description, isActive, cas_number, chemical_formula, stock_status, grade } = req.body;
+        let { name, categoryId, description, isActive, cas_number, chemical_formula, purity, grade } = req.body;
 
         const data = {};
         if (name) {
@@ -259,7 +259,7 @@ app.put('/api/products/:id', authenticateToken, upload.single('image'), async (r
         if (categoryId) data.categoryId = parseInt(categoryId);
         if (cas_number !== undefined) data.casNumber = cas_number || null;
         if (chemical_formula !== undefined) data.formula = chemical_formula || null;
-        if (stock_status !== undefined) data.stockStatus = stock_status || 'In Stock';
+        if (purity !== undefined) data.purity = purity || '99%';
         if (grade !== undefined) data.grade = grade || 'IP/BP/USP';
 
         if (req.file) {

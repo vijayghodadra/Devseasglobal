@@ -68,6 +68,19 @@ async function main() {
             console.error(`❌ Failed to seed product ${prod.name}:`, err.message);
         }
     }
+
+    // ─── Catalogues ───────────────────────────────────────────────
+    const existingCat = await prisma.catalogue.findMany({ where: { fileName: 'Catloge1.pdf' } });
+    if (existingCat.length === 0) {
+        await prisma.catalogue.create({
+            data: {
+                name: 'Main Catalogue',
+                fileName: 'Catloge1.pdf',
+                fileUrl: 'Catloge1.pdf'
+            }
+        });
+        console.log('✅ Standard Catalogue Seeded');
+    }
 }
 
 main()

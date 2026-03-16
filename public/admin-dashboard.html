@@ -430,6 +430,13 @@
                     </div>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-icon teal"><i class="fas fa-file-pdf"></i></div>
+                    <div>
+                        <div class="stat-value" id="statCatalogues">0</div>
+                        <div class="stat-label">Catalogues</div>
+                    </div>
+                </div>
+                <div class="stat-card">
                     <div class="stat-icon amber"><i class="fas fa-envelope"></i></div>
                     <div>
                         <div class="stat-value" id="statInquiries">0</div>
@@ -544,6 +551,10 @@
                 const resCat = await fetch('/api/categories');
                 const categories = await resCat.json();
                 document.getElementById('statCategories').textContent = categories.length || 0;
+
+                const resCatalogues = await fetch('/api/catalogues');
+                const catalogues = await resCatalogues.json();
+                document.getElementById('statCatalogues').textContent = catalogues.length || 0;
 
             } catch (err) {
                 console.error(err);

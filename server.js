@@ -12,31 +12,6 @@ const prisma = new PrismaClient();
 const app = express();
 const JWT_SECRET = process.env.JWT_SECRET || 'devseas_super_secret_key_2026';
 
-// Sync Database on Startup (for Render)
-try {
-    const dbUrl = process.env.DATABASE_URL || '';
-    const protocol = dbUrl.split(':')[0];
-    console.log(`🔗 Detected Database Protocol: ${protocol}`);
-    
-    if (dbUrl) {
-        console.log('🔄 Syncing database schema...');
-        // We remove --skip-generate to ensure the client is always fresh on the server
-        execSync('npx prisma db push --accept-data-loss', { stdio: 'inherit' });
-        console.log('✅ Database schema synced');
-        
-        // Run seed 
-        execSync('node prisma/seed.js', { stdio: 'inherit' });
-        console.log('✅ Database seeded');
-    } else {
-        console.error('❌ DATABASE_URL is not defined in environment variables.');
-    }
-} catch (err) {
-    console.error('❌ Database sync/seed failed:', err.message);
-    if (err.message.includes('P1001') || err.message.includes('protocol')) {
-        console.error('💡 TIP: Check if your DATABASE_URL on Render starts with "postgresql://" (if using Render DB) or "mysql://" (if using external MySQL).');
-    }
-}
-
 // Test Database Connection
 prisma.$connect()
     .then(() => console.log('✅ Successfully connected to Database'))
@@ -298,6 +273,49 @@ app.delete('/api/products/:id', authenticateToken, async (req, res) => {
         await prisma.product.delete({ where: { id: parseInt(req.params.id) } });
         res.json({ success: true });
     } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// --- Catalogue API ---
+app.get('/api/catalogues', async (req, res) => {
+    try {
+        const catalogues = await prisma.catalogue.findMany({
+            where: { isActive: true },
+            orderBy: { createdAt: 'desc' }
+        });
+        res.json(catalogues);
+    } catch (error) {
+        console.error('Error fetching catalogues:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.post('/api/catalogues', authenticateToken, upload.single('file'), async (req, res) => {
+    try {
+        const { name } = req.body;
+        if (!name || !req.file) return res.status(400).json({ error: 'Name and File are required' });
+
+        const catalogue = await prisma.catalogue.create({
+            data: {
+                name,
+                fileName: req.file.originalname,
+                fileUrl: req.file.filename
+            }
+        });
+        res.status(201).json(catalogue);
+    } catch (error) {
+        console.error('Error creating catalogue:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.delete('/api/catalogues/:id', authenticateToken, async (req, res) => {
+    try {
+        await prisma.catalogue.delete({ where: { id: parseInt(req.params.id) } });
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error deleting catalogue:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

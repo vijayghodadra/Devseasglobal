@@ -64,6 +64,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadNavbarCategories();
+
+    // --- Dynamic Navbar Catalogue Logic ---
+    async function loadNavbarCatalogues() {
+        const dynamicWrappers = document.querySelectorAll('.dropdown-catalogues-dynamic');
+        if (dynamicWrappers.length === 0) return;
+
+        try {
+            const res = await fetch('/api/catalogues');
+            if (!res.ok) throw new Error('Failed to fetch');
+            const catalogues = await res.json();
+
+            dynamicWrappers.forEach(wrapper => {
+                let html = '';
+                if (catalogues.length === 0) {
+                    html = '<span class="dropdown-item">No catalogues available</span>';
+                } else {
+                    catalogues.forEach(cat => {
+                        html += `<a href="/uploads/${cat.fileUrl}" class="dropdown-item" target="_blank" download="${cat.fileName}"><i class="fas fa-download" style="margin-right: 8px; font-size: 0.8em;"></i>${cat.name}</a>`;
+                    });
+                }
+                wrapper.innerHTML = html;
+            });
+        } catch (error) {
+            console.error('Error loading navbar catalogues:', error);
+            dynamicWrappers.forEach(wrapper => {
+                wrapper.innerHTML = '<span class="dropdown-item">Error loading catalogues</span>';
+            });
+        }
+    }
+
+    loadNavbarCatalogues();
 });
 
 // Mobile Dropdown Toggle (Global function called by onclick)

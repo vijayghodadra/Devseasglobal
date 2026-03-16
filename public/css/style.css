@@ -3387,6 +3387,12 @@ body.light-mode .footer-bottom {
     min-height: 400px;
 }
 
+@media (min-width: 992px) {
+    .slider-wrapper {
+        height: 600px; /* Reduced fixed height for desktop to prevent excessive cropping */
+    }
+}
+
 .slide {
     position: absolute;
     top: 0;
@@ -3395,6 +3401,7 @@ body.light-mode .footer-bottom {
     height: 100%;
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    background-color: #b8d1ea; /* Matching light blue background for slider images */
 }
 
 .slide.active {
@@ -3404,8 +3411,17 @@ body.light-mode .footer-bottom {
 .slide picture, .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Default for mobile */
     object-position: center;
+}
+
+@media (min-width: 992px) {
+    .slider-wrapper {
+        height: 550px; /* More standard desktop banner height */
+    }
+    .slide picture, .slide img {
+        object-fit: contain; /* Ensure full image (including text) is visible on desktop */
+    }
 }
 
 /* Dots Navigation */

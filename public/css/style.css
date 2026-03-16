@@ -1244,23 +1244,23 @@ footer {
 }
 
 /* Custom icon colors based on screenshot */
-.q-icon-microscope {
+.q-icon-gem {
     color: #a5b4fc;
 }
 
-.q-icon-factory {
+.q-icon-tags {
     color: #fca5a5;
 }
 
-.q-icon-flask {
+.q-icon-supply {
     color: #6ee7b7;
 }
 
-.q-icon-clipboard {
+.q-icon-support {
     color: #fdba74;
 }
 
-.q-icon-chart {
+.q-icon-partnership {
     color: #c4b5fd;
 }
 
@@ -3300,23 +3300,23 @@ body.light-mode .about-img {
     border-color: var(--border-color) !important;
 }
 
-body.light-mode .q-icon-microscope {
+body.light-mode .q-icon-gem {
     color: #4f46e5 !important;
 }
 
-body.light-mode .q-icon-factory {
+body.light-mode .q-icon-tags {
     color: #dc2626 !important;
 }
 
-body.light-mode .q-icon-flask {
+body.light-mode .q-icon-supply {
     color: #059669 !important;
 }
 
-body.light-mode .q-icon-clipboard {
+body.light-mode .q-icon-support {
     color: #d97706 !important;
 }
 
-body.light-mode .q-icon-chart {
+body.light-mode .q-icon-partnership {
     color: #7c3aed !important;
 }
 

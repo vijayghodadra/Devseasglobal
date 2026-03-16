@@ -26,7 +26,7 @@
     <header>
         <div class="container navbar">
             <a href="index.html" class="logo-container" style="text-decoration: none;">
-                <img src="assets/images/DEVSEAS logo.png" alt="DevSeas Global" class="site-logo"
+                <img src="assets/images/dev_new_logo.png" alt="DevSeas Global" class="site-logo"
                     style="height: 40px; width: 40" loading="eager">
             </a>
 
@@ -64,40 +64,37 @@
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-wrapper" style="display:flex; align-items:center; gap:2rem;">
-                <!-- Left: Text Content -->
-                <div class="hero-content" data-aos="fade-right" style="flex:1;">
-                    <h1>DevSeas Global</h1>
-                    <p class="company-name-hero">"Global Reach, Diverse Products"</p>
-                    <p class="company-name-hero" style="font-style: italic;">"Delivering Quality Across Continents."</p>
-
-                    <div class="info-box" data-aos="fade-up" data-aos-delay="200">
-                        <p>
-                            <i class="fas fa-check-circle" style="color: var(--primary);"></i>
-                            <span class="highlight">DevSeas Global specializes in premium export solutions</span> —
-                            connecting international markets with reliable, efficient, and high-quality products
-                            tailored to
-                            every business need.
-                        </p>
-                    </div>
-
-                    <div class="badges" data-aos="fade-up" data-aos-delay="400">
-                        <div class="badge badge-ip"><i class="fas fa-check"></i> IP Grade</div>
-                        <div class="badge badge-bp"><i class="fas fa-check"></i> BP Grade</div>
-                        <div class="badge badge-usp"><i class="fas fa-check"></i> USP Grade</div>
-                    </div>
-
-                    <div class="cta-buttons" data-aos="fade-up" data-aos-delay="600">
-                        <a href="products.html" class="btn btn-primary">View Products</a>
-                        <a href="contact.html" class="btn btn-outline">Contact Us</a>
-                    </div>
-                </div>
-
-
-
+    <!-- Home Slider Section (Replaces Old Hero) -->
+    <section class="home-slider">
+        <div class="slider-wrapper">
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="assets/images/MSN11.jpg">
+                    <img src="assets/images/DSN11.jpg" alt="Quality Products, Global Standards">
+                </picture>
             </div>
+            <!-- Slide 2 -->
+            <div class="slide">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="assets/images/MSN21.jpg">
+                    <img src="assets/images/DSN21.jpg" alt="Your Partner in Export Excellence">
+                </picture>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="assets/images/MSN31.jpg">
+                    <img src="assets/images/DSN31.jpg" alt="Global Reach, Diverse Products">
+                </picture>
+            </div>
+        </div>
+        
+        <!-- Slider Navigation -->
+        <div class="slider-nav">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
         </div>
     </section>
 
@@ -425,8 +422,8 @@
         <div class="container">
             <div class="footer-top">
                 <div class="footer-logo-col">
-                    <div class="logo-container" style="background: transparent; color: white; padding: 0;">
-                        <img src="assets/images/DEVSEAS logo.png" alt="DevSeas" style="height:40px; width:auto;"
+                    <div class="logo-container">
+                        <img src="assets/images/dev_new_logo.png" alt="DevSeas" style="height:40px; width:auto;"
                             loading="lazy">
                     </div>
                     <p>We are committed to empowering businesses worldwide by offering premium export solutions tailored
@@ -461,37 +458,37 @@
 
                 <div class="footer-links">
                     <h4 class="footer-heading">Contact Info</h4>
-                    <ul class="contact-info-list">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>FF-16 Kanha Luxuria, Savita Hospital Road,<br>Parivar Char Rasta, Vadodara, Gujarat 390025</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone-alt"></i>
-                            <span>
-                                <a href="tel:+917096656379" style="color: inherit; text-decoration: none;">+91 70966 56379</a>,
-                                <a href="tel:+916352322122" style="color: inherit; text-decoration: none;">+91 63523 22122</a>
-                            </span>
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Lüneburger Straße 3, 2.OG (2nd floor),<br>10557 Berlin, GERMANY</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone-alt"></i>
-                            <span>
-                                <a href="tel:+4915560547524" style="color: inherit; text-decoration: none;">+49 155 60547524</a>
-                            </span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>info@devseasglobal.com</span>
-                        </li>
-                    </ul>
+                        <ul class="contact-info-list">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span><strong>India Office:</strong> FF-16 Kanha Luxuria, Savita Hospital Road, Parivar Char Rasta, Vadodara, Gujarat 390025</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+917096656379" style="color: inherit; text-decoration: none;">+91 70966 56379</a>, 
+                                    <a href="tel:+916352322122" style="color: inherit; text-decoration: none;">+91 63523 22122</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-globe-europe"></i>
+                                <span><strong>Germany Office:</strong> Lüneburger Straße 3, 2.OG (2nd floor), 10557 Berlin, GERMANY</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>
+                                    <a href="tel:+4915560547524" style="color: inherit; text-decoration: none;">+49 155 60547524</a>
+                                </span>
+                            </li>
+                            <li style="margin-top: 15px;">
+                                <i class="fas fa-envelope"></i>
+                                <span>info@devseasglobal.com</span>
+                            </li>
+                        </ul>
                 </div>
             </div>
 
-            <div class="footer-bottom" style="flex-direction: column; gap: 15px;">
+            <div class="footer-bottom">
                 <div
                     style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 10px;">
                     <p style="margin: 0;">&copy; 2026 DevSeas Global. All rights reserved.</p>
@@ -532,6 +529,58 @@
             mirror: true,
             offset: 100
         });
+
+        // Home Slider Logic
+        let slideIndex = 0;
+        let slideTimer;
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+            
+            if (slides.length === 0) return;
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                slides[i].classList.remove("active");
+            }
+            
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            
+            slides[slideIndex - 1].style.display = "block";
+            slides[slideIndex - 1].classList.add("active");
+            dots[slideIndex - 1].className += " active";
+            
+            slideTimer = setTimeout(showSlides, 5000); // Change image every 5 seconds
+        }
+
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex = n;
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                slides[i].classList.remove("active");
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            
+            slides[slideIndex].style.display = "block";
+            slides[slideIndex].classList.add("active");
+            dots[slideIndex].className += " active";
+            slideIndex++; // Offset for showSlides
+            slideTimer = setTimeout(showSlides, 5000);
+        }
+
+        document.addEventListener('DOMContentLoaded', showSlides);
     </script>
 
 </body>

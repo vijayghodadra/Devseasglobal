@@ -40,25 +40,36 @@ async function main() {
     const pharmacat = await prisma.category.findUnique({ where: { slug: 'pharmaceutical-excipients' } });
     const indcat    = await prisma.category.findUnique({ where: { slug: 'industrial-chemicals' } });
 
+    console.log('Category IDs:', { pharmacat: pharmacat?.id, indcat: indcat?.id });
+
+    if (!pharmacat || !indcat) {
+        console.error('❌ Essential categories not found. Seed failed.');
+        return;
+    }
+
     const products = [
-        { name: 'Dried Aluminium Hydroxide',  slug: 'dried-aluminium-hydroxide-001',  casNumber: '21645-51-2', formula: 'Al(OH)3',   description: 'High purity aluminium hydroxide for antacid formulations', categoryId: pharmacat.id, stockStatus: 'In Stock',      grade: 'IP/BP/USP' },
-        { name: 'Magnesium Hydroxide',         slug: 'magnesium-hydroxide-001',        casNumber: '1309-42-8',  formula: 'Mg(OH)2',   description: 'Pharmaceutical grade magnesium hydroxide',                categoryId: pharmacat.id, stockStatus: 'In Stock',      grade: 'IP/BP/USP' },
-        { name: 'Sodium Chloride',             slug: 'sodium-chloride-001',            casNumber: '7647-14-5',  formula: 'NaCl',      description: 'Food and pharma grade sodium chloride',                   categoryId: pharmacat.id, stockStatus: 'In Stock',      grade: 'IP/BP/USP/Food' },
-        { name: 'Isopropyl Alcohol (IPA)',     slug: 'isopropyl-alcohol-001',          casNumber: '67-63-0',    formula: 'C3H8O',     description: 'High-purity IPA for industrial and pharma use',           categoryId: indcat.id,    stockStatus: 'In Stock',      grade: 'Tech Grade' },
-        { name: 'Calcium Carbonate',           slug: 'calcium-carbonate-001',          casNumber: '471-34-1',   formula: 'CaCO3',     description: 'Pharmaceutical and food grade calcium carbonate',         categoryId: pharmacat.id, stockStatus: 'Limited Stock', grade: 'IP/BP/USP' },
+        { name: 'Dried Aluminium Hydroxide',  slug: 'dried-aluminium-hydroxide-001',  casNumber: '21645-51-2', formula: 'Al(OH)3',   description: 'High purity aluminium hydroxide for antacid formulations', categoryId: pharmacat.id, grade: 'IP/BP/USP' },
+        { name: 'Magnesium Hydroxide',         slug: 'magnesium-hydroxide-001',        casNumber: '1309-42-8',  formula: 'Mg(OH)2',   description: 'Pharmaceutical grade magnesium hydroxide',                categoryId: pharmacat.id, grade: 'IP/BP/USP' },
+        { name: 'Sodium Chloride',             slug: 'sodium-chloride-001',            casNumber: '7647-14-5',  formula: 'NaCl',      description: 'Food and pharma grade sodium chloride',                   categoryId: pharmacat.id, grade: 'IP/BP/USP/Food' },
+        { name: 'Isopropyl Alcohol (IPA)',     slug: 'isopropyl-alcohol-001',          casNumber: '67-63-0',    formula: 'C3H8O',     description: 'High-purity IPA for industrial and pharma use',           categoryId: indcat.id,    grade: 'Tech Grade' },
+        { name: 'Calcium Carbonate',           slug: 'calcium-carbonate-001',          casNumber: '471-34-1',   formula: 'CaCO3',     description: 'Pharmaceutical and food grade calcium carbonate',         categoryId: pharmacat.id, grade: 'IP/BP/USP' },
     ];
 
     for (const prod of products) {
-        const existing = await prisma.product.findUnique({ where: { slug: prod.slug } });
-        if (!existing) {
-            await prisma.product.create({ data: prod });
-            console.log(`✅ Product: ${prod.name}`);
-        } else {
-            console.log(`ℹ️  Product exists: ${prod.name}`);
+        try {
+            const existing = await prisma.product.findUnique({ where: { slug: prod.slug } });
+            if (!existing) {
+                await prisma.product.create({ data: prod });
+                console.log(`✅ Product: ${prod.name}`);
+            } else {
+                console.log(`ℹ️  Product exists: ${prod.name}`);
+            }
+        } catch (err) {
+            console.error(`❌ Failed to seed product ${prod.name}:`, err.message);
         }
     }
 }
 
 main()
-    .catch((e) => { console.error(e); process.exit(1); })
+    .catch((e) => { console.error('❌ Seed script error:', e); process.exit(1); })
     .finally(async () => { await prisma.$disconnect(); });

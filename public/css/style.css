@@ -3369,3 +3369,169 @@ body.light-mode .contact-map {
 body.light-mode .footer-bottom {
     border-top: 1px solid var(--border-color) !important;
 }
+
+/* ===========================
+   HOME SLIDER STYLES
+=========================== */
+.home-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #0f172a;
+}
+
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    min-height: 400px;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide picture, .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Dots Navigation */
+.slider-nav {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot.active, .dot:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.2);
+}
+
+/* Mobile Fixes */
+@media (max-width: 768px) {
+    .slider-wrapper {
+        height: 60vh;
+        min-height: 250px;
+    }
+
+    .slide picture, .slide img {
+        object-fit: cover; /* Changed to cover for better filling, ensuring images are centered */
+    }
+    
+    .contact-info-list li {
+        justify-content: center;
+        text-align: left; /* Keep text left aligned but center the row */
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 10px;
+    }
+
+    .contact-info-list li span {
+        text-align: left;
+        flex: 1;
+        max-width: 280px;
+    }
+    
+    .contact-info-list i {
+        margin-top: 4px;
+        flex-shrink: 0;
+    }
+
+    .footer-top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .footer-links, .footer-logo-col {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+    
+    .footer-links ul {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        list-style: none;
+    }
+
+    .footer-bottom {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 15px;
+        padding: 20px 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .footer-bottom-links {
+        justify-content: center !important;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .footer-bottom p {
+        margin: 0;
+    }
+
+    /* WhatsApp floating button adjustment to avoid overlap */
+    .whatsapp-float {
+        bottom: 15px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        opacity: 0.9; /* Subtle transparency */
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-wrapper {
+        height: 50vh;
+    }
+    
+    .footer-heading {
+        margin-bottom: 15px;
+    }
+    
+    .contact-info-list li {
+        max-width: 320px;
+    }
+}

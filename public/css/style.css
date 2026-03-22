@@ -72,11 +72,11 @@ body.light-mode {
     box-sizing: border-box;
 }
 
-html,
+/*html,
 body {
     overflow-x: hidden;
 }
-
+*/
 body {
     font-family: 'Inter', sans-serif;
     color: var(--text-white);
@@ -3389,7 +3389,8 @@ body.light-mode .footer-bottom {
 
 @media (min-width: 992px) {
     .slider-wrapper {
-        height: 600px; /* Reduced fixed height for desktop to prevent excessive cropping */
+        height: 600px;
+        /* Reduced fixed height for desktop to prevent excessive cropping */
     }
 }
 
@@ -3401,26 +3402,33 @@ body.light-mode .footer-bottom {
     height: 100%;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    background-color: #b8d1ea; /* Matching light blue background for slider images */
+    background-color: #b8d1ea;
+    /* Matching light blue background for slider images */
 }
 
 .slide.active {
     opacity: 1;
 }
 
-.slide picture, .slide img {
+.slide picture,
+.slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Default for mobile */
+    object-fit: cover;
+    /* Default for mobile */
     object-position: center;
 }
 
 @media (min-width: 992px) {
     .slider-wrapper {
-        height: 550px; /* More standard desktop banner height */
+        height: 550px;
+        /* More standard desktop banner height */
     }
-    .slide picture, .slide img {
-        object-fit: contain; /* Ensure full image (including text) is visible on desktop */
+
+    .slide picture,
+    .slide img {
+        object-fit: contain;
+        /* Ensure full image (including text) is visible on desktop */
     }
 }
 
@@ -3445,7 +3453,8 @@ body.light-mode .footer-bottom {
     transition: all 0.3s;
 }
 
-.dot.active, .dot:hover {
+.dot.active,
+.dot:hover {
     background: var(--primary);
     border-color: var(--primary);
     transform: scale(1.2);
@@ -3458,13 +3467,16 @@ body.light-mode .footer-bottom {
         min-height: 250px;
     }
 
-    .slide picture, .slide img {
-        object-fit: cover; /* Changed to cover for better filling, ensuring images are centered */
+    .slide picture,
+    .slide img {
+        object-fit: cover;
+        /* Changed to cover for better filling, ensuring images are centered */
     }
-    
+
     .contact-info-list li {
         justify-content: center;
-        text-align: left; /* Keep text left aligned but center the row */
+        text-align: left;
+        /* Keep text left aligned but center the row */
         max-width: 100%;
         margin-left: auto;
         margin-right: auto;
@@ -3476,7 +3488,7 @@ body.light-mode .footer-bottom {
         flex: 1;
         max-width: 280px;
     }
-    
+
     .contact-info-list i {
         margin-top: 4px;
         flex-shrink: 0;
@@ -3488,15 +3500,16 @@ body.light-mode .footer-bottom {
         align-items: center;
         text-align: center;
     }
-    
-    .footer-links, .footer-logo-col {
+
+    .footer-links,
+    .footer-logo-col {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-bottom: 30px;
     }
-    
+
     .footer-links ul {
         padding: 0;
         display: flex;
@@ -3534,7 +3547,8 @@ body.light-mode .footer-bottom {
         width: 50px;
         height: 50px;
         font-size: 24px;
-        opacity: 0.9; /* Subtle transparency */
+        opacity: 0.9;
+        /* Subtle transparency */
     }
 }
 
@@ -3542,11 +3556,11 @@ body.light-mode .footer-bottom {
     .slider-wrapper {
         height: 50vh;
     }
-    
+
     .footer-heading {
         margin-bottom: 15px;
     }
-    
+
     .contact-info-list li {
         max-width: 320px;
     }

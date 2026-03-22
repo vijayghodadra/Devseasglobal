@@ -306,7 +306,9 @@
 
                 let delayCounter = 0;
                 filtered.forEach(p => {
-                    const imgUrl = p.image ? `/uploads/${p.image}` : 'https://img.icons8.com/color/96/pill.png';
+                    const imgHtml = p.image 
+                        ? `<img src="/uploads/${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'" style="max-height:100px; width:auto; object-fit:contain; background: transparent;">`
+                        : '';
                     const catName = p.category ? p.category.name : 'Uncategorized';
                     const cas = p.casNumber || 'N/A';
                     const desc = p.description || '';
@@ -321,7 +323,7 @@
                             <span class="grade-badge">${grade}</span>
                         </div>
                         <div class="pc-image-container">
-                            <img src="${imgUrl}" alt="${p.name}" loading="lazy" onerror="this.onerror=null; this.src='https://img.icons8.com/color/96/pill.png';" style="max-height:100px; width:auto; object-fit:contain; background: transparent;">
+                            ${imgHtml}
                         </div>
                         <h3 class="pc-title">${p.name}</h3>
                         <div class="pc-meta">

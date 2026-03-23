@@ -424,6 +424,10 @@
                             <label class="form-label">Grade / Specification <small style="color:#94a3b8;font-weight:400;">(shown on card top-right)</small></label>
                             <input type="text" id="prodGrade" name="grade" class="form-control" placeholder="e.g. IP/BP/USP, Tech Grade, Food Grade">
                         </div>
+                        <div>
+                            <label class="form-label">Price <small style="color:#94a3b8;font-weight:400;">(shown instead of Contact for pricing)</small></label>
+                            <input type="text" id="prodPrice" name="price" class="form-control" placeholder="e.g. $50/kg or ₹500/kg">
+                        </div>
                         <div
                             style="grid-column: span 2; display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
                             <button type="button" class="btn" style="background:#e2e8f0; color:#475569;"
@@ -573,6 +577,7 @@
             document.getElementById('prodDesc').value = product.description || '';
             document.getElementById('prodPurity').value = product.purity || '';
             document.getElementById('prodGrade').value = product.grade || '';
+            document.getElementById('prodPrice').value = product.price || '';
 
             document.getElementById('addBtnText').innerText = "Edit Product";
             document.getElementById('submitBtnText').innerText = "Update Product";

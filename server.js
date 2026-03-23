@@ -243,7 +243,8 @@ app.post('/api/products', authenticateToken, upload.single('image'), async (req,
             casNumber: cas_number || null,
             formula: chemical_formula || null,
             purity: purity || '99%',
-            grade: grade || 'IP/BP/USP'
+            grade: grade || 'IP/BP/USP',
+            price: price || null
         };
 
         if (req.file) {
@@ -260,7 +261,7 @@ app.post('/api/products', authenticateToken, upload.single('image'), async (req,
 
 app.put('/api/products/:id', authenticateToken, upload.single('image'), async (req, res) => {
     try {
-        let { name, categoryId, description, isActive, cas_number, chemical_formula, purity, grade } = req.body;
+        let { name, categoryId, description, price, isActive, cas_number, chemical_formula, purity, grade } = req.body;
 
         const data = {};
         if (name) {
@@ -274,6 +275,7 @@ app.put('/api/products/:id', authenticateToken, upload.single('image'), async (r
         if (chemical_formula !== undefined) data.formula = chemical_formula || null;
         if (purity !== undefined) data.purity = purity || '99%';
         if (grade !== undefined) data.grade = grade || 'IP/BP/USP';
+        if (price !== undefined) data.price = price || null;
 
         if (req.file) {
             data.image = req.file.filename;

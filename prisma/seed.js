@@ -5,15 +5,20 @@ const prisma = new PrismaClient();
 async function main() {
     // ─── Admin User ───────────────────────────────────────────────
     const adminEmail = 'admin@devseas.com';
+    const hashedPassword = await bcrypt.hash('Devseas@123123', 10);
     const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } });
+    
     if (!existingAdmin) {
-        const hashedPassword = await bcrypt.hash('password', 10);
         const user = await prisma.user.create({
             data: { name: 'Admin User', email: adminEmail, password: hashedPassword, isAdmin: true }
         });
-        console.log(`✅ Created admin: ${user.email} / password`);
+        console.log(`✅ Created admin: ${user.email} / new password`);
     } else {
-        console.log('ℹ️  Admin user already exists.');
+        await prisma.user.update({
+            where: { email: adminEmail },
+            data: { password: hashedPassword }
+        });
+        console.log('ℹ️  Admin user already exists. Password updated to new password.');
     }
 
     // ─── Categories ───────────────────────────────────────────────

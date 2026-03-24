@@ -381,10 +381,21 @@
 
         <main class="page-content">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" style="flex-wrap: wrap; gap: 10px;">
                     <span><i class="fas fa-flask" style="color:#2dd4bf;margin-right:8px;"></i> All Products</span>
-                    <button class="btn btn-add" onclick="toggleForm()"><i class="fas fa-plus"></i> <span
-                            id="addBtnText">Add Product</span></button>
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <div style="position: relative;">
+                            <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 0.85rem;"></i>
+                            <input type="text" id="productSearch" class="form-control" style="width: 200px; padding: 6px 12px 6px 30px; font-size: 0.85rem;" placeholder="Search products..." onkeyup="filterProducts()">
+                        </div>
+                        <select id="productSort" class="form-control" style="width: auto; padding: 6px 12px; font-size: 0.85rem;" onchange="filterProducts()">
+                            <option value="default">Sort by</option>
+                            <option value="az">Name: A-Z</option>
+                            <option value="za">Name: Z-A</option>
+                        </select>
+                        <button class="btn btn-add" onclick="toggleForm()"><i class="fas fa-plus"></i> <span
+                                id="addBtnText">Add Product</span></button>
+                    </div>
                 </div>
 
                 <div class="form-container" id="productFormContainer">
@@ -529,39 +540,64 @@
                 const products = await res.json();
                 if (!Array.isArray(products)) throw new Error('Invalid data from server');
                 pList = products;
-
-                if (products.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 40px; color:#94a3b8;"><i class="fas fa-flask" style="font-size:2.5rem; margin-bottom:12px; opacity:0.3;"></i><br>No products found. Click "Add Product" to get started.</td></tr>';
-                } else {
-                    let html = '';
-                    products.forEach(p => {
-                        let imgHtml = p.image
-                            ? `<img src="/uploads/${p.image}" onerror="this.onerror=null; this.src='https://img.icons8.com/color/96/pill.png';" style="width:40px; height:40px; border-radius:6px; object-fit:cover;">`
-                            : `<div style="width:40px; height:40px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-flask"></i></div>`;
-
-                        html += `
-                        <tr>
-                            <td>${imgHtml}</td>
-                            <td>
-                                <strong style="color:#0f172a;">${p.name}</strong><br>
-                                <small style="color:#94a3b8;">${p.description ? p.description.substring(0, 45) + '...' : ''}</small>
-                            </td>
-                            <td><span class="badge-teal">${p.category ? p.category.name : '—'}</span></td>
-                            <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${p.casNumber || '—'}</td>
-                            <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${p.formula || '—'}</td>
-                            <td>
-                                <button class="btn btn-sm btn-edit" onclick="editProduct(${p.id})"><i class="fas fa-pen"></i> Edit</button>
-                                <button class="btn btn-sm btn-delete" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        `;
-                    });
-                    tbody.innerHTML = html;
-                }
+                filterProducts();
             } catch (err) {
                 console.error('Products load error:', err);
                 tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 40px; color:#ef4444;"><i class="fas fa-exclamation-triangle" style="font-size:2rem; margin-bottom:12px;"></i><br>Failed to load products.<br><small style="color:#94a3b8;">${err.message}</small><br><br><button class="btn btn-add" onclick="fetchProducts()">Retry</button></td></tr>`;
             }
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('productSearch') ? document.getElementById('productSearch').value.toLowerCase() : '';
+            const sort = document.getElementById('productSort') ? document.getElementById('productSort').value : 'default';
+            
+            let filtered = pList.filter(p => {
+                return (p.name && p.name.toLowerCase().includes(query)) || 
+                       (p.casNumber && p.casNumber.toLowerCase().includes(query)) ||
+                       (p.formula && p.formula.toLowerCase().includes(query)) ||
+                       (p.description && p.description.toLowerCase().includes(query)) ||
+                       (p.category && p.category.name && p.category.name.toLowerCase().includes(query));
+            });
+
+            if (sort === 'az') {
+                filtered.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+            } else if (sort === 'za') {
+                filtered.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+            }
+
+            renderProducts(filtered);
+        }
+
+        function renderProducts(products) {
+            const tbody = document.getElementById('productsTableBody');
+            if (products.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 40px; color:#94a3b8;"><i class="fas fa-flask" style="font-size:2.5rem; margin-bottom:12px; opacity:0.3;"></i><br>No products found. Click "Add Product" to get started.</td></tr>';
+                return;
+            }
+            let html = '';
+            products.forEach(p => {
+                let imgHtml = p.image
+                    ? `<img src="/uploads/${p.image}" onerror="this.onerror=null; this.src='https://img.icons8.com/color/96/pill.png';" style="width:40px; height:40px; border-radius:6px; object-fit:cover;">`
+                    : `<div style="width:40px; height:40px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-flask"></i></div>`;
+
+                html += `
+                <tr>
+                    <td>${imgHtml}</td>
+                    <td>
+                        <strong style="color:#0f172a;">${p.name}</strong><br>
+                        <small style="color:#94a3b8;">${p.description ? p.description.substring(0, 45) + '...' : ''}</small>
+                    </td>
+                    <td><span class="badge-teal">${p.category ? p.category.name : '—'}</span></td>
+                    <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${p.casNumber || '—'}</td>
+                    <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${p.formula || '—'}</td>
+                    <td>
+                        <button class="btn btn-sm btn-edit" onclick="editProduct(${p.id})"><i class="fas fa-pen"></i> Edit</button>
+                        <button class="btn btn-sm btn-delete" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                `;
+            });
+            tbody.innerHTML = html;
         }
 
         function editProduct(id) {

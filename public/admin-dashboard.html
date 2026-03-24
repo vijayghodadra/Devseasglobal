@@ -449,7 +449,10 @@
             <div class="card">
                 <div class="card-header">
                     <span><i class="fas fa-clock" style="color:#2dd4bf;margin-right:8px;"></i>Recent Inquiries</span>
-                    <button class="btn btn-sm btn-secondary" onclick="fetchData()">Refresh</button>
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn btn-sm btn-secondary" style="background:#fef2f2; color:#ef4444; border-color:#fca5a5;" onclick="clearMessages()"><i class="fas fa-trash"></i> Clear Messages</button>
+                        <button class="btn btn-sm btn-secondary" onclick="fetchData()">Refresh</button>
+                    </div>
                 </div>
                 <div class="card-body" style="padding:0;">
                     <div class="table-wrap">
@@ -559,6 +562,31 @@
             } catch (err) {
                 console.error(err);
                 document.getElementById('inquiriesTableBody').innerHTML = '<tr><td colspan="5" style="color: red; text-align:center; padding: 20px;">Error loading data.</td></tr>';
+            }
+        }
+
+        async function clearMessages() {
+            if (!confirm('Are you sure you want to delete all inquiries? This action cannot be undone.')) return;
+            
+            try {
+                const res = await fetch('/api/inquiries', {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (res.status === 401 || res.status === 403) {
+                    logout();
+                    return;
+                }
+                
+                if (res.ok) {
+                    fetchData();
+                } else {
+                    alert('Failed to clear messages.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('An error occurred while clearing messages.');
             }
         }
 

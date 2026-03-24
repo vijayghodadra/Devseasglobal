@@ -180,6 +180,16 @@ app.get('/api/inquiries', authenticateToken, async (req, res) => {
     }
 });
 
+app.delete('/api/inquiries', authenticateToken, async (req, res) => {
+    try {
+        await prisma.inquiry.deleteMany({});
+        res.json({ success: true, message: 'All inquiries cleared successfully.' });
+    } catch (error) {
+        console.error('Error clearing inquiries:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 app.post('/api/categories', authenticateToken, async (req, res) => {
     try {
         const { name, description } = req.body;

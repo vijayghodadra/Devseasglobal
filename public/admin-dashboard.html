@@ -493,7 +493,7 @@
         const userStr = localStorage.getItem('adminUser');
 
         if (!token) {
-            window.location.href = '/admin/login';
+            window.location.href = 'admin-login.html';
         }
 
         if (userStr) {
@@ -505,13 +505,13 @@
         function logout() {
             localStorage.removeItem('adminToken');
             localStorage.removeItem('adminUser');
-            window.location.href = '/admin/login';
+            window.location.href = 'admin-login.html';
         }
 
         async function fetchData() {
             try {
                 // Fetch inquiries
-                const resInq = await fetch('/api/inquiries', {
+                const resInq = await fetch(`${window.API_BASE_URL || ''}/api/inquiries`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
 
@@ -547,15 +547,15 @@
                 }
 
                 // Fetch Products and Categories count
-                const resProd = await fetch('/api/products');
+                const resProd = await fetch(`${window.API_BASE_URL || ''}/api/products`);
                 const products = await resProd.json();
                 document.getElementById('statProducts').textContent = products.length || 0;
 
-                const resCat = await fetch('/api/categories');
+                const resCat = await fetch(`${window.API_BASE_URL || ''}/api/categories`);
                 const categories = await resCat.json();
                 document.getElementById('statCategories').textContent = categories.length || 0;
 
-                const resCatalogues = await fetch('/api/catalogues');
+                const resCatalogues = await fetch(`${window.API_BASE_URL || ''}/api/catalogues`);
                 const catalogues = await resCatalogues.json();
                 document.getElementById('statCatalogues').textContent = catalogues.length || 0;
 
@@ -569,7 +569,7 @@
             if (!confirm('Are you sure you want to delete all inquiries? This action cannot be undone.')) return;
             
             try {
-                const res = await fetch('/api/inquiries', {
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/inquiries`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });

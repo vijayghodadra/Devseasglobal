@@ -244,7 +244,7 @@
             async function fetchProductsFromAPI() {
                 try {
                     // Fetch categories to populate dropdown dynamically
-                    const catRes = await fetch('/api/categories');
+                    const catRes = await fetch(`${window.API_BASE_URL || ''}/api/categories`);
                     const categories = await catRes.json();
 
                     categoryFilter.innerHTML = '<option value="all">All Products</option>';
@@ -258,7 +258,7 @@
                     if (initialCategory) categoryFilter.value = initialCategory;
 
                     // Fetch products
-                    const prodRes = await fetch('/api/products');
+                    const prodRes = await fetch(`${window.API_BASE_URL || ''}/api/products`);
                     allProducts = await prodRes.json();
 
                     renderProducts();
@@ -308,7 +308,7 @@
                 let delayCounter = 0;
                 filtered.forEach(p => {
                     const imgHtml = p.image 
-                        ? `<img src="/uploads/${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'" style="max-height:100px; width:auto; object-fit:contain; background: transparent;">`
+                        ? `<img src="${window.API_BASE_URL || ''}/uploads/${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'" style="max-height:100px; width:auto; object-fit:contain; background: transparent;">`
                         : '';
                     const catName = p.category ? p.category.name : 'Uncategorized';
                     const cas = p.casNumber || 'N/A';

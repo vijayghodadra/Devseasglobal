@@ -420,7 +420,7 @@
     <script>
         const token = localStorage.getItem('adminToken');
         const userStr = localStorage.getItem('adminUser');
-        if (!token) window.location.href = '/admin/login';
+        if (!token) window.location.href = 'admin-login.html';
         if (userStr) {
             const user = JSON.parse(userStr);
             document.getElementById('welcomeName').textContent = `Welcome, ${user.name}`;
@@ -429,7 +429,7 @@
         function logout() {
             localStorage.removeItem('adminToken');
             localStorage.removeItem('adminUser');
-            window.location.href = '/admin/login';
+            window.location.href = 'admin-login.html';
         }
 
         function toggleForm() {
@@ -448,7 +448,7 @@
             const tbody = document.getElementById('cataloguesTableBody');
             tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 30px; color:#94a3b8;">Loading...</td></tr>';
             try {
-                const res = await fetch('/api/catalogues');
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/catalogues`);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const catalogues = await res.json();
 
@@ -461,7 +461,7 @@
                         <tr>
                             <td style="color:#94a3b8;">${cat.id}</td>
                             <td><strong style="color:#0f172a;">${cat.name}</strong></td>
-                            <td><a href="/uploads/${cat.fileUrl}" target="_blank" style="color:var(--primary-dark); text-decoration:none;"><i class="fas fa-file-pdf"></i> ${cat.fileName}</a></td>
+                            <td><a href="${window.API_BASE_URL || ''}/uploads/${cat.fileUrl}" target="_blank" style="color:var(--primary-dark); text-decoration:none;"><i class="fas fa-file-pdf"></i> ${cat.fileName}</a></td>
                             <td style="color:#94a3b8; font-size:0.8rem;">${new Date(cat.createdAt).toLocaleDateString()}</td>
                             <td>
                                 <button class="btn btn-sm btn-delete" onclick="deleteCatalogue(${cat.id})"><i class="fas fa-trash"></i> Delete</button>
@@ -482,7 +482,7 @@
             const formData = new FormData(e.target);
 
             try {
-                const res = await fetch('/api/catalogues', {
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/catalogues`, {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}` },
                     body: formData

@@ -449,7 +449,7 @@
     <script>
         const token = localStorage.getItem('adminToken');
         const userStr = localStorage.getItem('adminUser');
-        if (!token) window.location.href = '/admin/login';
+        if (!token) window.location.href = 'admin-login.html';
         if (userStr) {
             const user = JSON.parse(userStr);
             document.getElementById('welcomeName').textContent = `Welcome, ${user.name}`;
@@ -458,7 +458,7 @@
         function logout() {
             localStorage.removeItem('adminToken');
             localStorage.removeItem('adminUser');
-            window.location.href = '/admin/login';
+            window.location.href = 'admin-login.html';
         }
 
         function toggleForm() {
@@ -486,7 +486,7 @@
             const tbody = document.getElementById('categoriesTableBody');
             tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 30px; color:#94a3b8;">Loading...</td></tr>';
             try {
-                const res = await fetch('/api/categories');
+                const res = await fetch(`${window.API_BASE_URL || ''}/api/categories`);
                 if (!res.ok) throw new Error(`Server error: HTTP ${res.status}`);
                 const categories = await res.json();
                 if (!Array.isArray(categories)) throw new Error('Invalid data from server');

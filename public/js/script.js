@@ -1,3 +1,5 @@
+window.API_BASE_URL = location.hostname === 'localhost' || location.hostname === '127.0.0.1' ? '' : 'https://api.devseasglobal.com';
+
 document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('mobile-menu');
@@ -46,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dynamicWrappers.length === 0) return;
 
         try {
-            const res = await fetch('/api/categories');
+            const res = await fetch(`${window.API_BASE_URL}/api/categories`);
             if (!res.ok) throw new Error('Failed to fetch');
             const categories = await res.json();
 
@@ -71,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dynamicWrappers.length === 0) return;
 
         try {
-            const res = await fetch('/api/catalogues');
+            const res = await fetch(`${window.API_BASE_URL}/api/catalogues`);
             if (!res.ok) throw new Error('Failed to fetch');
             const catalogues = await res.json();
 
@@ -81,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     html = '<span class="dropdown-item">No catalogues available</span>';
                 } else {
                     catalogues.forEach(cat => {
-                        html += `<a href="/uploads/${cat.fileUrl}" class="dropdown-item" target="_blank" download="${cat.fileName}"><i class="fas fa-download" style="margin-right: 8px; font-size: 0.8em;"></i>${cat.name}</a>`;
+                        html += `<a href="${window.API_BASE_URL}/uploads/${cat.fileUrl}" class="dropdown-item" target="_blank" download="${cat.fileName}"><i class="fas fa-download" style="margin-right: 8px; font-size: 0.8em;"></i>${cat.name}</a>`;
                     });
                 }
                 wrapper.innerHTML = html;

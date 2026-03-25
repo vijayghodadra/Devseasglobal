@@ -354,9 +354,25 @@ app.delete('/api/catalogues/:id', authenticateToken, async (req, res) => {
     }
 });
 
-// Admin Login Route mapping
+// Admin Routes
 app.get('/admin/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin-login.html'));
+});
+
+app.get('/admin/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin-dashboard.html'));
+});
+
+app.get('/admin/products', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin-products.html'));
+});
+
+app.get('/admin/categories', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin-categories.html'));
+});
+
+app.get('/admin/catalogues', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin-catalogues.html'));
 });
 
 // Fallback to index.html for single-page app or static HTML navigation

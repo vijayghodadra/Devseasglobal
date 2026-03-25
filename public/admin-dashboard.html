@@ -382,18 +382,18 @@
         </div>
         <nav class="sidebar-nav">
             <div class="nav-section-label">Main</div>
-            <a href="admin-dashboard.html" class="active">
+            <a href="/admin/dashboard" class="active">
                 <span class="icon"><i class="fas fa-chart-line"></i></span> Dashboard
             </a>
             <div class="nav-section-label">Catalogue</div>
-            <a href="admin-categories.html">
+            <a href="/admin/categories">
                 <span class="icon"><i class="fas fa-tags"></i></span> Categories
             </a>
-            <a href="admin-products.html">
+            <a href="/admin/products">
                 <span class="icon"><i class="fas fa-flask"></i></span> Products
             </a>
             <div class="nav-section-label">Communication</div>
-            <a href="admin-dashboard.html">
+            <a href="/admin/dashboard">
                 <span class="icon"><i class="fas fa-envelope"></i></span> Inquiries
             </a>
         </nav>
@@ -493,7 +493,7 @@
         const userStr = localStorage.getItem('adminUser');
 
         if (!token) {
-            window.location.href = 'admin-login.html';
+            window.location.href = '/admin/login';
         }
 
         if (userStr) {
@@ -505,7 +505,7 @@
         function logout() {
             localStorage.removeItem('adminToken');
             localStorage.removeItem('adminUser');
-            window.location.href = 'admin-login.html';
+            window.location.href = '/admin/login';
         }
 
         async function fetchData() {

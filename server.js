@@ -39,7 +39,25 @@ prisma.$connect()
     .then(() => console.log('✅ Successfully connected to Database'))
     .catch(err => console.error('❌ Database connection error:', err));
 
-app.use(cors());
+// CORS - allow localhost (dev) + Serverbyte frontend (production)
+const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:5500',
+    'http://127.0.0.1:5500',
+    'https://devseasglobal.com',
+    'https://www.devseasglobal.com',
+];
+app.use(cors({
+    origin: function (origin, callback) {
+        // Allow requests with no origin (curl, Postman, same-origin)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin) || origin.includes('onrender.com')) {
+            return callback(null, true);
+        }
+        return callback(new Error('CORS policy: Origin not allowed'));
+    },
+    credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
